@@ -1,8 +1,8 @@
 package com.sqli.stories.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,7 @@ public class Story implements Serializable {
     private int storyPoint;
     private int priority;
 
+    @ManyToMany(mappedBy = "stories",fetch = FetchType.LAZY)
     private List<Sprint> sprints;
 
     public Story() {

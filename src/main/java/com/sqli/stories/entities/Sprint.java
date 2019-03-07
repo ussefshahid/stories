@@ -1,10 +1,9 @@
 package com.sqli.stories.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "sprints")
@@ -13,6 +12,11 @@ public class Sprint implements Serializable {
     private Long numero;
     private LocalDate dateDebut;
     private LocalDate dateFin;
+
+    @ManyToMany
+    @JoinTable(name="Sprint_Story",joinColumns=@JoinColumn(name="numero"),
+            inverseJoinColumns=@JoinColumn(name="jiraKey"))
+    private List<Story> stories;
 
     public Sprint(Long numero, LocalDate dateDebut, LocalDate dateFin) {
         this.numero = numero;

@@ -16,6 +16,10 @@ public class Member implements Serializable {
     private LocalDate dateEntreeProjet;
     private LocalDate dateSortieProjet;
 
+    public Member(String login) {
+        this.login = login;
+    }
+
     public Member(String login, String firstName, String lastName, LocalDate dateEntreeProjet, LocalDate dateSortieProjet) {
         this.login = login;
         this.firstName = firstName;

@@ -1,23 +1,29 @@
 package com.sqli.stories.entities;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "equipeMembers")
 public class EquipeMember implements Serializable {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name="Equipe_ID")
     private Equipe equipe;
-    @EmbeddedId
+    @OneToOne
     private Member member;
-    @EmbeddedId
+    @OneToOne
     private Role role;
     private LocalDate dateEntree;
     private LocalDate dateSortie;
+
+    public EquipeMember(Equipe equipe, Member member, Role role) {
+        this.equipe = equipe;
+        this.member = member;
+        this.role = role;
+    }
 
     public EquipeMember(Equipe equipe, Member member, Role role, LocalDate dateEntree, LocalDate dateSortie) {
         this.equipe = equipe;
