@@ -1,5 +1,8 @@
 package com.sqli.stories.entities;
 
+import com.sqli.stories.entities.state.StoryState;
+import com.sqli.stories.entities.stateFactory.StoryStateFactory;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -11,11 +14,11 @@ public class Story implements Serializable {
     @Id
     private Long jiraKey;
     private String title;
-    private StoryStatus status;
     private int storyPoint;
     private int priority;
+    private StoryState storyState;
 
-    @ManyToMany(mappedBy = "stories",fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY)
     private List<Sprint> sprints;
 
     public Story() {
@@ -24,8 +27,8 @@ public class Story implements Serializable {
     public Story(Long jiraKey, String title, int storyPoint, int priority) {
         this.jiraKey = jiraKey;
         this.title = title;
-        this.status = StoryStatus.DOING;
         this.storyPoint = storyPoint;
+        this.storyState= StoryStateFactory.createToDoStoryState(this);
         this.priority = priority;
     }
 
@@ -45,13 +48,6 @@ public class Story implements Serializable {
         this.title = title;
     }
 
-    public StoryStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(StoryStatus status) {
-        this.status = status;
-    }
 
     public int getStoryPoint() {
         return storyPoint;
@@ -77,6 +73,14 @@ public class Story implements Serializable {
         sprints.add(sprint);
     }
 
+    public StoryState getStoryState() {
+        return storyState;
+    }
+
+    public void setStoryState(StoryState storyState) {
+        this.storyState = storyState;
+    }
+
     @Override
     public String toString() {
         return "Story{" +
@@ -94,13 +98,12 @@ public class Story implements Serializable {
                 priority == story.priority &&
                 Objects.equals(jiraKey, story.jiraKey) &&
                 Objects.equals(title, story.title) &&
-                status == story.status &&
                 Objects.equals(sprints, story.sprints);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(jiraKey, title, status, storyPoint, priority, sprints);
+        return Objects.hash(jiraKey, title, storyPoint, priority, sprints);
     }
 
 }

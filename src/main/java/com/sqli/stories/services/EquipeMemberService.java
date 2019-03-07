@@ -10,6 +10,7 @@ public interface EquipeMemberService {
     EquipeMember updateEquipeMembre(EquipeMember equipeMember);
 
     void deleteEquipeMember(Long idEquipeMember);
+    EquipeMember getEquipeMemberById(long id);
 
     List<EquipeMember> getAllEquipeMembers();
 
