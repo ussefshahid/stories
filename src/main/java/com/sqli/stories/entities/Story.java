@@ -10,15 +10,10 @@ public class Story implements Serializable {
     @Id
     private Long jiraKey;
     private String title;
-    private Status status;
+    private StoryStatus status;
     private int storyPoint;
     private int priority;
 
     private List<Sprint> sprints;
 }
 
-enum Status {
-    STARTED,
-    PROCESSING,
-    DONE,
-}
