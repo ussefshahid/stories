@@ -2,10 +2,12 @@ package com.sqli.stories.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "sprints")
 public class Sprint implements Serializable {
     @Id
     private Long numero;
@@ -43,5 +45,12 @@ public class Sprint implements Serializable {
 
     public void setDateFin(LocalDate dateFin) {
         this.dateFin = dateFin;
+    }
+
+    @Override
+    public String toString() {
+        return "Sprint{" +
+                "numero=" + numero +
+                '}';
     }
 }

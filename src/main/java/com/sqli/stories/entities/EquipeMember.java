@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "assign")
+@Table(name = "equipeMembers")
 public class EquipeMember implements Serializable {
     @Id
     private Equipe equipe;
@@ -68,5 +68,14 @@ public class EquipeMember implements Serializable {
 
     public void setDateSortie(LocalDate dateSortie) {
         this.dateSortie = dateSortie;
+    }
+
+    @Override
+    public String toString() {
+        return "EquipeMember{" +
+                "equipe=" + equipe +
+                ", member=" + member +
+                ", role=" + role +
+                '}';
     }
 }
