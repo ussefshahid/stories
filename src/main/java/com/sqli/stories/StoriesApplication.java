@@ -1,11 +1,11 @@
 package com.sqli.stories;
 
-import com.sqli.stories.dao.EquipeMemberRepository;
-import com.sqli.stories.dao.EquipeRepository;
+import com.sqli.stories.dao.TeamMemberRepository;
+import com.sqli.stories.dao.TeamRepository;
 import com.sqli.stories.dao.MemberRepository;
 import com.sqli.stories.dao.RoleRepository;
-import com.sqli.stories.entities.Equipe;
-import com.sqli.stories.entities.EquipeMember;
+import com.sqli.stories.entities.Team;
+import com.sqli.stories.entities.TeamMember;
 import com.sqli.stories.entities.Member;
 import com.sqli.stories.entities.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +20,14 @@ public class StoriesApplication implements CommandLineRunner {
     @Autowired
     private MemberRepository memberRepository;
     @Autowired
-    private EquipeRepository equipeRepository;
+    private TeamRepository teamRepository;
     @Autowired
-    private EquipeMemberRepository equipeMemberRepository;
+    private TeamMemberRepository teamMemberRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(StoriesApplication.class, args);
     }
+
 
     @Override
     public void run(String... args) throws Exception {
@@ -42,16 +43,14 @@ public class StoriesApplication implements CommandLineRunner {
                 .forEach(System.out::println);
 
         //*************
-        Equipe _equipe=equipeRepository.save(new Equipe("Atlas"));
-        equipeRepository.findAll().stream()
+        Team _team = teamRepository.save(new Team("Atlas"));
+        _team.getMembers().forEach(System.out::println);
+        teamRepository.findAll().stream()
                 .forEach(System.out::println);
 
         //*************
-        equipeMemberRepository.save(new EquipeMember(_equipe, _member, _role));
-        equipeMemberRepository.findAll().stream()
-                .forEach(equipeMember -> System.out.println(equipeMember));
+        teamMemberRepository.save(new TeamMember(_team, _member, _role));
+        teamMemberRepository.findAll().stream()
+                .forEach(System.out::println);
     }
-
-
-
 }

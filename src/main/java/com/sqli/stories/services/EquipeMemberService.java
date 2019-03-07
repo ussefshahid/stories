@@ -1,17 +1,17 @@
 package com.sqli.stories.services;
 
-import com.sqli.stories.entities.EquipeMember;
+import com.sqli.stories.entities.TeamMember;
 
 import java.util.List;
 
 public interface EquipeMemberService {
-    EquipeMember addEquipemembre(EquipeMember equipeMember);
+    TeamMember addEquipemembre(TeamMember teamMember);
 
-    EquipeMember updateEquipeMembre(EquipeMember equipeMember);
+    TeamMember updateEquipeMembre(TeamMember teamMember);
 
     void deleteEquipeMember(Long idEquipeMember);
 
-    List<EquipeMember> getAllEquipeMembers();
+    List<TeamMember> getAllEquipeMembers();
 
 
 }

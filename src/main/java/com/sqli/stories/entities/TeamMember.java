@@ -7,12 +7,12 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "equipeMembers")
-public class EquipeMember implements Serializable {
+public class TeamMember implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    @JoinColumn(name="Equipe_ID")
-    private Equipe equipe;
+    @JoinColumn(name="TEAM_ID")
+    private Team team;
     @OneToOne
     private Member member;
     @OneToOne
@@ -20,29 +20,29 @@ public class EquipeMember implements Serializable {
     private LocalDate dateEntree;
     private LocalDate dateSortie;
 
-    public EquipeMember(Equipe equipe, Member member, Role role) {
-        this.equipe = equipe;
+    public TeamMember(Team team, Member member, Role role) {
+        this.team = team;
         this.member = member;
         this.role = role;
     }
 
-    public EquipeMember(Equipe equipe, Member member, Role role, LocalDate dateEntree, LocalDate dateSortie) {
-        this.equipe = equipe;
+    public TeamMember(Team team, Member member, Role role, LocalDate dateEntree, LocalDate dateSortie) {
+        this.team = team;
         this.member = member;
         this.role = role;
         this.dateEntree = dateEntree;
         this.dateSortie = dateSortie;
     }
 
-    public EquipeMember() {
+    public TeamMember() {
     }
 
-    public Equipe getEquipe() {
-        return equipe;
+    public Team getTeam() {
+        return team;
     }
 
-    public void setEquipe(Equipe equipe) {
-        this.equipe = equipe;
+    public void setTeam(Team team) {
+        this.team = team;
     }
 
     public Member getMember() {
@@ -79,8 +79,8 @@ public class EquipeMember implements Serializable {
 
     @Override
     public String toString() {
-        return "EquipeMember{" +
-                "equipe=" + equipe +
+        return "TeamMember{" +
+                "team=" + team +
                 ", member=" + member +
                 ", role=" + role +
                 '}';
@@ -90,9 +90,9 @@ public class EquipeMember implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EquipeMember that = (EquipeMember) o;
+        TeamMember that = (TeamMember) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(equipe, that.equipe) &&
+                Objects.equals(team, that.team) &&
                 Objects.equals(member, that.member) &&
                 Objects.equals(role, that.role) &&
                 Objects.equals(dateEntree, that.dateEntree) &&
@@ -101,6 +101,6 @@ public class EquipeMember implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, equipe, member, role, dateEntree, dateSortie);
+        return Objects.hash(id, team, member, role, dateEntree, dateSortie);
     }
 }
