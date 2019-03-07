@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "members")
@@ -78,5 +79,22 @@ public class Member implements Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return Objects.equals(login, member.login) &&
+                Objects.equals(firstName, member.firstName) &&
+                Objects.equals(lastName, member.lastName) &&
+                Objects.equals(dateEntreeProjet, member.dateEntreeProjet) &&
+                Objects.equals(dateSortieProjet, member.dateSortieProjet);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(login, firstName, lastName, dateEntreeProjet, dateSortieProjet);
     }
 }

@@ -3,6 +3,7 @@ package com.sqli.stories.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "equipeMembers")
@@ -83,5 +84,23 @@ public class EquipeMember implements Serializable {
                 ", member=" + member +
                 ", role=" + role +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EquipeMember that = (EquipeMember) o;
+        return Objects.equals(id, that.id) &&
+                Objects.equals(equipe, that.equipe) &&
+                Objects.equals(member, that.member) &&
+                Objects.equals(role, that.role) &&
+                Objects.equals(dateEntree, that.dateEntree) &&
+                Objects.equals(dateSortie, that.dateSortie);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, equipe, member, role, dateEntree, dateSortie);
     }
 }

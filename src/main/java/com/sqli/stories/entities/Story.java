@@ -1,11 +1,9 @@
 package com.sqli.stories.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "stories")
@@ -23,10 +21,10 @@ public class Story implements Serializable {
     public Story() {
     }
 
-    public Story(Long jiraKey, String title, StoryStatus status, int storyPoint, int priority) {
+    public Story(Long jiraKey, String title, int storyPoint, int priority) {
         this.jiraKey = jiraKey;
         this.title = title;
-        this.status = status;
+        this.status = StoryStatus.DOING;
         this.storyPoint = storyPoint;
         this.priority = priority;
     }
@@ -86,5 +84,24 @@ public class Story implements Serializable {
                 ", title='" + title + '\'' +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Story story = (Story) o;
+        return storyPoint == story.storyPoint &&
+                priority == story.priority &&
+                Objects.equals(jiraKey, story.jiraKey) &&
+                Objects.equals(title, story.title) &&
+                status == story.status &&
+                Objects.equals(sprints, story.sprints);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(jiraKey, title, status, storyPoint, priority, sprints);
+    }
+
 }
 
