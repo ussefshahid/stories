@@ -9,6 +9,7 @@ import java.io.Serializable;
 @Table(name = "roles")
 public class Role implements Serializable {
     @Id
+    private long id;
     private String name;
 
     public Role(String name) {
@@ -16,6 +17,10 @@ public class Role implements Serializable {
     }
 
     public Role() {
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getName() {
