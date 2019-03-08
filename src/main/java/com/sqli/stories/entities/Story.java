@@ -16,6 +16,8 @@ public class Story implements Serializable {
     private String title;
     private int storyPoint;
     private int priority;
+    @OneToOne
+    @JoinColumn(name = "story_state")
     private StoryState storyState;
 
     @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY)
