@@ -1,5 +1,7 @@
 package com.sqli.stories.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ public class Team implements Serializable {
         this.name = name;
     }
 
+    @JsonIgnore
     public List<TeamMember> getMembers() {
         return members;
     }

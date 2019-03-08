@@ -6,7 +6,6 @@ import com.sqli.stories.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 @Service
 public class DefaultTeamService implements TeamService {
@@ -14,13 +13,13 @@ public class DefaultTeamService implements TeamService {
     private TeamRepository teamRepository;
 
     @Override
-    public Team add(Team equipe) {
-        return teamRepository.save(equipe);
+    public Team add(Team team) {
+        return teamRepository.save(team);
     }
 
     @Override
-    public Team update(Team equipe) {
-        return teamRepository.save(equipe);
+    public Team update(Team team) {
+        return teamRepository.save(team);
     }
 
     @Override
@@ -39,7 +38,7 @@ public class DefaultTeamService implements TeamService {
     }
 
     @Override
-    public void delete(Long idTeam) {
-    teamRepository.deleteById(idTeam);
+    public void delete(Long id) {
+    teamRepository.deleteById(id);
     }
 }

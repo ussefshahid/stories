@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RequestMapping("/api")
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class MemberController {
     @Autowired
