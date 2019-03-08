@@ -3,14 +3,17 @@ package com.sqli.stories.controller;
 import com.sqli.stories.entities.Story;
 import com.sqli.stories.services.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
+@RestController
 public class StoryController {
     @Autowired
     private StoryService storyService;
@@ -20,36 +23,38 @@ public class StoryController {
         return Optional
                 .ofNullable(storyService.add(story))
                 .map(addedStory -> ResponseEntity.ok().body(addedStory))
-                .orElseGet(() -> ResponseEntity.notFound().build() );
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PutMapping("/story")
     public ResponseEntity<Story> update(@RequestBody Story story) {
         return Optional
-                .ofNullable(storyService.updateStoryStatus(story) )
+                .ofNullable(storyService.updateStoryStatus(story))
                 .map(updatedStory -> ResponseEntity.ok().body(updatedStory))
-                .orElseGet(() -> ResponseEntity.notFound().build() );
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/stories")
     public ResponseEntity<List<Story>> getAll() {
-        return Optional
-                .ofNullable( storyService.getAll() )
-                .map(story -> ResponseEntity.ok().body(story))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(storyService.getAll());
     }
 
     @DeleteMapping("/story/{id}")
-    public void delete(@PathVariable("id") Long id) {
-        storyService.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        try {
+            storyService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/story/{id}")
-    public ResponseEntity<Story> getById(@PathVariable("id") Long id){
+    public ResponseEntity<Story> getById(@PathVariable("id") Long id) {
         return Optional
-                .ofNullable( storyService.getByKey(id) )
+                .ofNullable(storyService.getByKey(id))
                 .map(story -> ResponseEntity.ok().body(story))
-                .orElseGet(() -> ResponseEntity.notFound().build() );
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping("/story/todo")

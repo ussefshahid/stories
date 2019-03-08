@@ -40,8 +40,8 @@ public class TeamControllerTest {
 
     @Test
     public void testAddEquipe() throws Exception {
-        HttpEntity<Object> equipe = getHttpEntity("{\"name\": \"Atlas\" }");
-        ResponseEntity<Team> response = template.postForEntity("/app/equipe", equipe, Team.class);
+        HttpEntity<Object> team = getHttpEntity("{\"name\": \"Atlas\" }");
+        ResponseEntity<Team> response = template.postForEntity("/api/team", team, Team.class);
         Assert.assertEquals("Atlas", response.getBody().getName());
         Assert.assertEquals(200, response.getStatusCode().value());
 

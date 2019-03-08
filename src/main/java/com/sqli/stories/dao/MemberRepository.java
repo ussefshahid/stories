@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member, String> {
-    @Query("select member from Member where m.firstName like :keyword or m.lastName like :keyword or m.login like :keyword")
+    @Query("SELECT m FROM Member m where m.firstName like :keyword or m.lastName like :keyword or m.login like :keyword")
     List<Member> searchByKeyword(@Param("keyword") String keyword);
 }

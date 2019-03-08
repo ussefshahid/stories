@@ -3,14 +3,17 @@ package com.sqli.stories.controller;
 import com.sqli.stories.entities.TeamMember;
 import com.sqli.stories.services.TeamMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
+@RestController
 public class TeamMemberController {
     @Autowired
     private TeamMemberService teamMemberService;
@@ -30,12 +33,9 @@ public class TeamMemberController {
                 .orElseGet(() -> ResponseEntity.notFound().build() );
     }
 
-    @GetMapping("/teamMembers")
+    @GetMapping("/teamMember")
     public ResponseEntity<List<TeamMember>> getAll() {
-        return Optional
-                .ofNullable(teamMemberService.getAll())
-                .map(teamMember -> ResponseEntity.ok().body(teamMember))
-                .orElseGet(() -> ResponseEntity.notFound().build() );
+        return ResponseEntity.ok(teamMemberService.getAll());
     }
 
     @GetMapping("/teamMember/{id}")
@@ -47,7 +47,13 @@ public class TeamMemberController {
     }
 
     @DeleteMapping("/teamMember/{id}")
-    public void deleteTeam(@PathVariable("id") Long id) {
-        teamMemberService.delete(id);
+    public ResponseEntity<Void> deleteTeam(@PathVariable("id") Long id) {
+        try{
+            teamMemberService.delete(id);
+            return ResponseEntity.noContent().build();
+        }catch(ResourceNotFoundException ex){
+        return ResponseEntity.notFound().build();
+        }
+
     }
 }

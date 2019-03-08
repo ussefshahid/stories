@@ -1,15 +1,12 @@
 package com.sqli.stories.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "roles")
 public class Role implements Serializable {
     @Id
-    private Long id;
     private String name;
 
     public Role(String name) {
@@ -17,10 +14,6 @@ public class Role implements Serializable {
     }
 
     public Role() {
-    }
-
-    public long getId() {
-        return id;
     }
 
     public String getName() {

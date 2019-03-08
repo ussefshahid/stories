@@ -6,8 +6,10 @@ import com.sqli.stories.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import javax.management.Query;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class DefaultRoleService implements RoleService {
     @Autowired
@@ -24,17 +26,16 @@ public class DefaultRoleService implements RoleService {
     }
 
     @Override
-    public Role getById(Long id) {
-        return roleRepository.getOne(id);
+    public List<Role> getById(String name) {
+        return roleRepository.getById(name);
     }
-
     @Override
     public List<Role> getAll() {
         return roleRepository.findAll();
     }
 
     @Override
-    public void delete(Long id) {
-    roleRepository.deleteById(id);
+    public void delete(String name) {
+        roleRepository.deleteById(name);
     }
 }

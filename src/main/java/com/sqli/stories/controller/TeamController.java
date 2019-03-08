@@ -3,14 +3,16 @@ package com.sqli.stories.controller;
 import com.sqli.stories.entities.Team;
 import com.sqli.stories.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api")
+@RestController
 public class TeamController {
     @Autowired
     private TeamService teamService;
@@ -41,15 +43,17 @@ public class TeamController {
 
     @GetMapping("/teams")
     public ResponseEntity<List<Team>> getAll() {
-        return Optional
-                .ofNullable( teamService.getAll() )
-                .map(team -> ResponseEntity.ok().body(team))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        return ResponseEntity.ok(teamService.getAll());
     }
 
     @DeleteMapping("/team/{id}")
-    public void delete(@PathVariable("id") Long id) {
-        teamService.delete(id);
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
+        try {
+            teamService.delete(id);
+            return ResponseEntity.noContent().build();
+        }catch(ResourceNotFoundException e){
+           return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/team/{id}")
