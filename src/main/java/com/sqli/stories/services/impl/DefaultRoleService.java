@@ -26,7 +26,7 @@ public class DefaultRoleService implements RoleService {
     }
 
     @Override
-    public Role getById(String name) {
+    public List<Role> getById(String name) {
         return roleRepository.getById(name);
     }
     @Override

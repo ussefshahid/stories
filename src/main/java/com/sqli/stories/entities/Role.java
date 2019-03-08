@@ -6,7 +6,9 @@ import java.io.Serializable;
 @Entity
 @Table(name = "roles")
 public class Role implements Serializable {
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(unique = true)
     private String name;
 
     public Role(String name) {
@@ -14,6 +16,10 @@ public class Role implements Serializable {
     }
 
     public Role() {
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -27,9 +33,8 @@ public class Role implements Serializable {
     @Override
     public String toString() {
         return "Role{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
-
-
 }
