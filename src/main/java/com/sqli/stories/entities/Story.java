@@ -1,7 +1,7 @@
 package com.sqli.stories.entities;
 
 import com.sqli.stories.entities.state.StoryState;
-import com.sqli.stories.entities.stateFactory.StoryStateFactory;
+import com.sqli.stories.entities.factory.StoryStateFactory;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -65,10 +65,6 @@ public class Story implements Serializable {
         this.priority = priority;
     }
 
-    public List<Sprint> getSprints() {
-        return sprints;
-    }
-
     public void addSprint(Sprint sprint) {
         sprints.add(sprint);
     }
@@ -79,6 +75,18 @@ public class Story implements Serializable {
 
     public void setStoryState(StoryState storyState) {
         this.storyState = storyState;
+    }
+
+    public void toDo() {
+        storyState.toDoState();
+    }
+
+    public void inProgress() {
+        storyState.inProgressState();
+    }
+
+    public void completed() {
+        storyState.completedState();
     }
 
     @Override

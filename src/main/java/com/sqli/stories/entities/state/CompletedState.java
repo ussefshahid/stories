@@ -28,4 +28,9 @@ public class CompletedState extends StoryState {
     public void completedState() {
         throw new StoryIllegalStateException("the story is already completed ");
     }
+
+    @Override
+    public String toString() {
+        return "Completed";
+    }
 }

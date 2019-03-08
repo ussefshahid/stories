@@ -1,7 +1,7 @@
 package com.sqli.stories.entities.state;
 
 import com.sqli.stories.entities.Story;
-import com.sqli.stories.entities.stateFactory.StoryStateFactory;
+import com.sqli.stories.entities.factory.StoryStateFactory;
 import com.sqli.stories.exceptions.StoryIllegalStateException;
 
 import javax.persistence.DiscriminatorValue;
@@ -21,11 +21,16 @@ public class ToDoState extends StoryState {
 
     @Override
     public void toDoState() {
-        throw new StoryIllegalStateException("the story is already in to do state ");
+        throw new StoryIllegalStateException("This story is already in todo state ");
     }
 
     @Override
     public void completedState() {
         story.setStoryState(StoryStateFactory.createCompletedStoryState(story));
+    }
+
+    @Override
+    public String toString() {
+        return "ToDo";
     }
 }

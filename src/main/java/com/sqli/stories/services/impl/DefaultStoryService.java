@@ -6,17 +6,15 @@ import com.sqli.stories.services.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class DefaultStoryService implements StoryService {
-
     @Autowired
     private StoryRepository storyRepository;
 
     @Override
-    public Story addStory(Story story) {
+    public Story add(Story story) {
         return storyRepository.save(story);
     }
 
@@ -26,29 +24,32 @@ public class DefaultStoryService implements StoryService {
     }
 
     @Override
-    public List<Story> getAllStories() {
-        List<Story> stories = new ArrayList<>();
-        storyRepository.findAll().forEach(stories::add);
-        return stories;
+    public List<Story> getAll() {
+        return storyRepository.findAll();
     }
 
     @Override
-    public void deleteStory(long keyJira) {
+    public Story getByKey(Long keyJira) {
+        return storyRepository.getOne(keyJira);
+    }
+
+    @Override
+    public void delete(long keyJira) {
         storyRepository.deleteById(keyJira);
     }
 
     @Override
     public void toDo(Story story) {
-         story.getStoryState().toDoState();
+         story.toDo();
     }
 
     @Override
     public void inProgress(Story story) {
-        story.getStoryState().inProgressState();
+        story.inProgress();
     }
 
     @Override
     public void completed(Story story) {
-        story.getStoryState().completedState();
+        story.completed();
     }
 }

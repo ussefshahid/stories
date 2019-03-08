@@ -5,8 +5,9 @@ import com.sqli.stories.entities.Sprint;
 import java.util.List;
 
 public interface SprintService {
-    Sprint addSprint(Sprint sprint);
-    Sprint udpateSprint(Sprint sprint);
-    List<Sprint> getAllSprints();
-    void deleteSprint(long numeroSprint);
+    Sprint add(Sprint sprint);
+    Sprint update(Sprint sprint);
+    Sprint getById(Long id);
+    List<Sprint> getAll();
+    void delete(long numero);
 }

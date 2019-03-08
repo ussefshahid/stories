@@ -5,10 +5,11 @@ import com.sqli.stories.entities.Story;
 import java.util.List;
 
 public interface StoryService {
-    Story addStory(Story story);
+    Story add(Story story);
     Story updateStoryStatus(Story story);
-    List<Story> getAllStories();
-    void deleteStory(long keyJira);
+    List<Story> getAll();
+    Story getByKey(Long keyJira);
+    void delete(long keyJira);
     void toDo(Story story);
     void inProgress(Story story);
     void completed(Story story);

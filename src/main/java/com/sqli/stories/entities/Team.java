@@ -14,7 +14,7 @@ public class Team implements Serializable {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "equipe",cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "team",cascade = CascadeType.MERGE)
     private List<TeamMember> members=new ArrayList<>();
 
     public Team() {
@@ -38,10 +38,6 @@ public class Team implements Serializable {
 
     public List<TeamMember> getMembers() {
         return members;
-    }
-
-    public void setMembers(List<TeamMember> members) {
-        this.members = members;
     }
 
     @Override

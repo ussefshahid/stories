@@ -9,28 +9,37 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 @Service
-public class DefaultMemberService  implements MemberService {
+public class DefaultMemberService implements MemberService {
     @Autowired
     private MemberRepository memberRepository;
+
     @Override
-    public Member addMember(Member member) {
+    public Member getByLogin(String login) {
+        return memberRepository.getOne(login);
+    }
+
+    @Override
+    public Member add(Member member) {
         return memberRepository.save(member);
     }
 
     @Override
-    public Member updateMember(Member member) {
+    public Member update(Member member) {
         return memberRepository.save(member);
     }
 
     @Override
-    public List<Member> getAllMembers() {
-        List<Member> members=new ArrayList<>();
-        memberRepository.findAll().forEach(members::add);
-        return members;
+    public List<Member> searchByKeyword(String keyword) {
+        return memberRepository.searchByKeyword(keyword);
     }
 
     @Override
-    public void deleteMember(String loginMember) {
-    memberRepository.deleteById(loginMember);
+    public List<Member> getAll() {
+        return memberRepository.findAll();
+    }
+
+    @Override
+    public void delete(String login) {
+    memberRepository.deleteById(login);
     }
 }

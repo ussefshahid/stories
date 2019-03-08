@@ -1,4 +1,4 @@
-package com.sqli.stories.entities.stateFactory;
+package com.sqli.stories.entities.factory;
 
 import com.sqli.stories.entities.Story;
 import com.sqli.stories.entities.state.CompletedState;

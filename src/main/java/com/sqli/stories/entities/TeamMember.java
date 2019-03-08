@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "equipeMembers")
+@Table(name = "teamMembers")
 public class TeamMember implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

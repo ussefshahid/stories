@@ -12,25 +12,29 @@ import java.util.List;
 public class DefaultRoleService implements RoleService {
     @Autowired
     private RoleRepository roleRepository;
+
     @Override
-    public Role addRole(Role role) {
+    public Role add(Role role) {
         return roleRepository.save(role);
     }
 
     @Override
-    public Role updateRole(Role role) {
+    public Role update(Role role) {
         return roleRepository.save(role);
     }
 
     @Override
-    public List<Role> getAllRoles() {
-        List<Role> roles=new ArrayList<>();
-        roleRepository.findAll().forEach(roles::add);
-        return roles;
+    public Role getById(Long id) {
+        return roleRepository.getOne(id);
     }
 
     @Override
-    public void deleteRole(Long id) {
+    public List<Role> getAll() {
+        return roleRepository.findAll();
+    }
+
+    @Override
+    public void delete(Long id) {
     roleRepository.deleteById(id);
     }
 }
