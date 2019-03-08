@@ -32,7 +32,7 @@ public class MemberController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/member/{keyword}")
+    @GetMapping("/member/search/{keyword}")
     public ResponseEntity<List<Member>> getByKeyword(@PathVariable("keyword") String keyword) {
         return ResponseEntity.ok(memberService.searchByKeyword(keyword));
     }
