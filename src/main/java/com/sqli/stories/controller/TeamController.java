@@ -33,7 +33,7 @@ public class TeamController {
                 .orElseGet(() -> ResponseEntity.notFound().build() );
     }
 
-    @GetMapping("/team/{name}")
+    @GetMapping("/team/search/{name}")
     public ResponseEntity<Team> getByName(@PathVariable("name") String name) {
         return Optional
                 .ofNullable( teamService.getByName(name) )
