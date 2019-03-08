@@ -30,7 +30,7 @@ public class DefaultTeamService implements TeamService {
 
     @Override
     public Team getById(Long id) {
-        return teamRepository.getOne(id);
+        return teamRepository.findTeamById(id);
     }
 
     @Override

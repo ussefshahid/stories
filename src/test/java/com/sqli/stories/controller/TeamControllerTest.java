@@ -155,8 +155,8 @@ public class TeamControllerTest {
         Assert.assertEquals(200, response2.getStatusCode().value());
         Assert.assertEquals("Atlas", response2.getBody().getName());
 
-       /* ResponseEntity<Team> response3 = template.getForEntity("/api/search/team/145982245", Team.class);
-        Assert.assertEquals(404, response3.getStatusCode().value());*/
+        ResponseEntity<Team> response3 = template.getForEntity("/api/search/team/145982245", Team.class);
+        Assert.assertEquals(404, response3.getStatusCode().value());
 
         //cleaning the added team
         teamRepository.deleteById(response1.getBody().getId());

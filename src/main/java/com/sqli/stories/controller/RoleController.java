@@ -49,7 +49,10 @@ public class RoleController {
     }
 
     @GetMapping("/role/{id}")
-    public ResponseEntity<List<Role>> getById(@PathVariable("id") String name) {
-        return ResponseEntity.ok(roleService.getById(name));
+    public ResponseEntity<Role> getById(@PathVariable("id") String name) {
+        return Optional
+                .ofNullable(roleService.getById(name))
+                .map(team->ResponseEntity.ok().body(team))
+                .orElseGet(()->ResponseEntity.notFound().build());
     }
 }
