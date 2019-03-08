@@ -5,8 +5,10 @@ import com.sqli.stories.entities.Member;
 import java.util.List;
 
 public interface MemberService {
-    Member addMember(Member member);
-    Member updateMember(Member member);
-    List<Member> getAllMembers();
-    void deleteMember(String loginMember);
+    Member getByLogin(String login);
+    Member add(Member member);
+    Member update(Member member);
+    List<Member> searchByKeyword(String keyword);
+    List<Member> getAll();
+    void delete(String login);
 }

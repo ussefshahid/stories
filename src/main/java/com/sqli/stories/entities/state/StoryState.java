@@ -6,7 +6,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="storyState")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "state_type",discriminatorType = DiscriminatorType.STRING,length = 255)
+@DiscriminatorColumn(name = "state",discriminatorType = DiscriminatorType.STRING,length = 20)
 public abstract class StoryState {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +18,7 @@ public abstract class StoryState {
     }
     public abstract void inProgressState();
     public abstract void toDoState();
-    public abstract  void completedState();
+    public abstract void completedState();
+    public abstract String toString();
 
 }

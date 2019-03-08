@@ -7,20 +7,20 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "equipe")
-public class Equipe implements Serializable {
+@Table(name = "teams")
+public class Team implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "equipe",cascade = CascadeType.MERGE)
-    private List<EquipeMember> members=new ArrayList<>();
+    @OneToMany(mappedBy = "team",cascade = CascadeType.MERGE)
+    private List<TeamMember> members=new ArrayList<>();
 
-    public Equipe() {
+    public Team() {
     }
 
-    public Equipe(String name) {
+    public Team(String name) {
         this.name = name;
     }
 
@@ -36,17 +36,13 @@ public class Equipe implements Serializable {
         this.name = name;
     }
 
-    public List<EquipeMember> getMembers() {
+    public List<TeamMember> getMembers() {
         return members;
-    }
-
-    public void setMembers(List<EquipeMember> members) {
-        this.members = members;
     }
 
     @Override
     public String toString() {
-        return "Equipe{" +
+        return "Team{" +
                 "name='" + name + '\'' +
                 '}';
     }
@@ -55,10 +51,10 @@ public class Equipe implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Equipe equipe = (Equipe) o;
-        return Objects.equals(id, equipe.id) &&
-                Objects.equals(name, equipe.name) &&
-                Objects.equals(members, equipe.members);
+        Team team = (Team) o;
+        return Objects.equals(id, team.id) &&
+                Objects.equals(name, team.name) &&
+                Objects.equals(members, team.members);
     }
 
     @Override

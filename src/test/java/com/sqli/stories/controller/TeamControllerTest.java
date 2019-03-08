@@ -1,8 +1,8 @@
 package com.sqli.stories.controller;
 
-import com.sqli.stories.dao.EquipeRepository;
-import com.sqli.stories.entities.Equipe;
-import com.sqli.stories.services.EquipeService;
+import com.sqli.stories.dao.TeamRepository;
+import com.sqli.stories.entities.Team;
+import com.sqli.stories.services.TeamService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,43 +21,47 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class EquipeControllerTest {
+public class TeamControllerTest {
     MockMvc mockMVC;
 
     @Mock
-    private EquipeController equipeController;
+    private TeamController teamController;
     @Autowired
     private TestRestTemplate template;
     @Autowired
-    private EquipeService equipeService;
+    private TeamService teamService;
     @Autowired
-    EquipeRepository equipeRepository;
+    TeamRepository teamRepository;
 
     @Before
     public void setup() throws Exception {
-        mockMVC = MockMvcBuilders.standaloneSetup(equipeController).build();
+        mockMVC = MockMvcBuilders.standaloneSetup(teamController).build();
     }
 
     @Test
     public void testAddEquipe() throws Exception {
         HttpEntity<Object> equipe = getHttpEntity("{\"name\": \"Atlas\" }");
-        ResponseEntity<Equipe> response=template.postForEntity("/app/equipe",equipe,Equipe.class);
-        Assert.assertEquals("Atlas",response.getBody().getName());
-        Assert.assertEquals(200,response.getStatusCode().value());
+        ResponseEntity<Team> response = template.postForEntity("/app/equipe", equipe, Team.class);
+        Assert.assertEquals("Atlas", response.getBody().getName());
+        Assert.assertEquals(200, response.getStatusCode().value());
 
         // deleting the added team
-        equipeRepository.deleteById(response.getBody().getId());
+        teamRepository.deleteById(response.getBody().getId());
 
     }
-    @Test
-    public void testUpdateEquipe()throws Exception{
-        HttpEntity<Object> team=getHttpEntity("{\"name\": \"Atlas\" }");
-        ResponseEntity<Equipe> response=template.postForEntity("/app/equipe",team,Equipe.class);
-        Assert.assertEquals("Atlas",response.getBody().getName());
-        Assert.assertEquals(200,response.getStatusCode().value());
 
-        Long id=response.getBody().getId();
-        HttpEntity<Object> updatedTeam=getHttpEntity("{\"id\":"+id+",\"name\":\"Menira\"}");
+    @Test
+    public void testUpdateEquipe() throws Exception {
+        HttpEntity<Object> team = getHttpEntity("{\"name\": \"Atlas\" }");
+        ResponseEntity<Team> response = template.postForEntity("/app/equipe", team, Team.class);
+        Assert.assertEquals("Atlas", response.getBody().getName());
+        Assert.assertEquals(200, response.getStatusCode().value());
+
+        Long id = response.getBody().getId();
+        HttpEntity<Object> updatedTeam = getHttpEntity("{\"id\":" + id + ",\"name\":\"Menira\"}");
+
+        // deleting the added team
+        teamRepository.deleteById(response.getBody().getId());
 
     }
 

@@ -10,28 +10,31 @@ import java.util.ArrayList;
 import java.util.List;
 @Service
 public class DefaultSprintService implements SprintService {
-
     @Autowired
     private SprintRepository sprintRepository;
+
     @Override
-    public Sprint addSprint(Sprint sprint) {
+    public Sprint add(Sprint sprint) {
         return sprintRepository.save(sprint);
     }
 
     @Override
-    public Sprint udpateSprint(Sprint sprint) {
+    public Sprint update(Sprint sprint) {
         return sprintRepository.save(sprint);
     }
 
     @Override
-    public List<Sprint> getAllSprints() {
-        List<Sprint> sprints=new ArrayList<>();
-        sprintRepository.findAll().forEach(sprints::add);
-        return sprints;
+    public Sprint getById(Long id) {
+        return sprintRepository.getOne(id);
     }
 
     @Override
-    public void deleteSprint(long numeroSprint) {
-        sprintRepository.deleteById(numeroSprint);
+    public List<Sprint> getAll() {
+        return sprintRepository.findAll();
+    }
+
+    @Override
+    public void delete(long numero) {
+        sprintRepository.deleteById(numero);
     }
 }
