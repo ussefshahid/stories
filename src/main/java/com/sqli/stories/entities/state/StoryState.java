@@ -11,7 +11,16 @@ public abstract class StoryState {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected long id;
+    @OneToOne
     protected Story story;
+
+    public Story getStory() {
+        return story;
+    }
+
+    public void setStory(Story story) {
+        this.story = story;
+    }
 
     public StoryState(Story story) {
         this.story = story;

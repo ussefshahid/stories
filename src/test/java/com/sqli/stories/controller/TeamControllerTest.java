@@ -30,8 +30,6 @@ public class TeamControllerTest {
     private TestRestTemplate template;
     @Autowired
     private TeamService teamService;
-    @Autowired
-    TeamRepository teamRepository;
 
     @Before
     public void setup() throws Exception {
@@ -39,21 +37,21 @@ public class TeamControllerTest {
     }
 
     @Test
-    public void testAddEquipe() throws Exception {
+    public void testAddTeam() throws Exception {
         HttpEntity<Object> team = getHttpEntity("{\"name\": \"Atlas\" }");
         ResponseEntity<Team> response = template.postForEntity("/api/team", team, Team.class);
         Assert.assertEquals("Atlas", response.getBody().getName());
         Assert.assertEquals(200, response.getStatusCode().value());
 
         // deleting the added team
-        teamRepository.deleteById(response.getBody().getId());
+        teamService.delete(response.getBody().getId());
 
     }
 
     @Test
-    public void testUpdateEquipe() throws Exception {
+    public void testUpdateTeam() throws Exception {
         HttpEntity<Object> team = getHttpEntity("{\"name\": \"Atlas\" }");
-        ResponseEntity<Team> response = template.postForEntity("/app/equipe", team, Team.class);
+        ResponseEntity<Team> response = template.postForEntity("/api/team", team, Team.class);
         Assert.assertEquals("Atlas", response.getBody().getName());
         Assert.assertEquals(200, response.getStatusCode().value());
 
@@ -61,7 +59,7 @@ public class TeamControllerTest {
         HttpEntity<Object> updatedTeam = getHttpEntity("{\"id\":" + id + ",\"name\":\"Menira\"}");
 
         // deleting the added team
-        teamRepository.deleteById(response.getBody().getId());
+        teamService.delete(response.getBody().getId());
 
     }
 
