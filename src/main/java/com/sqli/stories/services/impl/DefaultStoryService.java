@@ -38,18 +38,4 @@ public class DefaultStoryService implements StoryService {
         storyRepository.deleteById(keyJira);
     }
 
-    @Override
-    public void toDo(Story story) {
-         story.toDo();
-    }
-
-    @Override
-    public void inProgress(Story story) {
-        story.inProgress();
-    }
-
-    @Override
-    public void completed(Story story) {
-        story.completed();
-    }
 }

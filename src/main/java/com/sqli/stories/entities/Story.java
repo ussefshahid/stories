@@ -1,8 +1,5 @@
 package com.sqli.stories.entities;
 
-import com.sqli.stories.entities.state.StoryState;
-import com.sqli.stories.entities.factory.StoryStateFactory;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -16,8 +13,6 @@ public class Story implements Serializable {
     private String title;
     private int storyPoint;
     private int priority;
-    @OneToOne
-    @JoinColumn(name = "story_state")
     private StoryState storyState;
 
     @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY)
@@ -30,7 +25,7 @@ public class Story implements Serializable {
         this.jiraKey = jiraKey;
         this.title = title;
         this.storyPoint = storyPoint;
-        this.storyState= StoryStateFactory.createToDoStoryState(this);
+        this.storyState = StoryState.Todo;
         this.priority = priority;
     }
 
@@ -77,18 +72,6 @@ public class Story implements Serializable {
 
     public void setStoryState(StoryState storyState) {
         this.storyState = storyState;
-    }
-
-    public void toDo() {
-        storyState.toDoState();
-    }
-
-    public void inProgress() {
-        storyState.inProgressState();
-    }
-
-    public void completed() {
-        storyState.completedState();
     }
 
     @Override
