@@ -47,8 +47,8 @@ public class RoleController {
         }
     }
 
-    @GetMapping("/role/{id}")
-    public ResponseEntity<List<Role>> getByName(@PathVariable("id") String name) {
+    @GetMapping("/role/{name}")
+    public ResponseEntity<List<Role>> getByName(@PathVariable("name") String name) {
         try {
             return ResponseEntity.ok(roleService.getByName(name));
         }catch (ResourceNotFoundException ex){
