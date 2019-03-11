@@ -14,14 +14,7 @@ public abstract class StoryState {
     @OneToOne
     protected Story story;
 
-    public Story getStory() {
-        return story;
-    }
-
-    public void setStory(Story story) {
-        this.story = story;
-    }
-
+   public StoryState(){}
     public StoryState(Story story) {
         this.story = story;
     }
@@ -29,5 +22,14 @@ public abstract class StoryState {
     public abstract void toDoState();
     public abstract void completedState();
     public abstract String toString();
+
+
+    public Story getStory() {
+        return story;
+    }
+
+    public void setStory(Story story) {
+        this.story = story;
+    }
 
 }

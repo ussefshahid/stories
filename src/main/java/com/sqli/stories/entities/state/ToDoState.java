@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 @Entity
 @DiscriminatorValue("ToDo")
 public class ToDoState extends StoryState {
+    public ToDoState() {
+    }
+
     public ToDoState(Story story) {
         super(story);
     }
