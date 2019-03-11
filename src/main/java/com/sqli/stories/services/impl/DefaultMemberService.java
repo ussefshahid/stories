@@ -6,7 +6,6 @@ import com.sqli.stories.services.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 @Service
 public class DefaultMemberService implements MemberService {
@@ -15,7 +14,7 @@ public class DefaultMemberService implements MemberService {
 
     @Override
     public Member getByLogin(String login) {
-        return memberRepository.getOne(login);
+        return memberRepository.getMemberByLogin(login);
     }
 
     @Override

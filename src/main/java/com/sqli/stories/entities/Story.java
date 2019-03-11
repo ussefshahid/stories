@@ -19,6 +19,7 @@ public class Story implements Serializable {
     private List<Sprint> sprints;
 
     public Story() {
+        this.storyState=StoryStateFactory.createToDoStoryState(this);
     }
 
     public Story(Long jiraKey, String title, int storyPoint, int priority) {

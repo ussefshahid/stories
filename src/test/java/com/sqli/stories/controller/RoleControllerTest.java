@@ -1,6 +1,7 @@
 package com.sqli.stories.controller;
 
 import com.sqli.stories.entities.Role;
+import com.sqli.stories.helpers.types.ListRolesType;
 import com.sqli.stories.services.RoleService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -56,14 +57,14 @@ public class RoleControllerTest {
         int roleNumberBefore =roleService.getAll().size();
         Assert.assertEquals(1, roleNumberBefore);
 
-        /*
+
         HttpEntity<Object> updatedRole = getHttpEntity("{\"id\":"+response.getBody().getId()+",\"name\":\"CP\"}");
         ResponseEntity<Role> response2 = template.postForEntity("/api/role", updatedRole, Role.class);
         Assert.assertEquals("CP", response2.getBody().getName());
         Assert.assertEquals(200, response2.getStatusCode().value());
         int teamNumbersAfter = roleService.getAll().size();
         Assert.assertEquals(1, teamNumbersAfter);
-         */
+
         // deleting the added team
         roleService.delete(response.getBody().getId());
     }
@@ -81,10 +82,9 @@ public class RoleControllerTest {
 
         Assert.assertEquals(200, response1.getStatusCode().value());
         Assert.assertEquals("CP", response1.getBody().getName());
+        ResponseEntity<ListRolesType> roles=template.getForEntity("/api/roles",ListRolesType.class);
 
-        int numberRoles = roleService.getAll().size();
-
-        Assert.assertEquals(2, numberRoles);
+        Assert.assertEquals(2, roles.getBody().size());
 
         //deleting the added Role
         roleService.delete(response.getBody().getId());
@@ -116,19 +116,19 @@ public class RoleControllerTest {
 
     }
 
-    @Test
-    public void testGetRoleById() {
+   /* @Test
+    public void testGetRoleByName() {
         HttpEntity<Object> role = getHttpEntity("{\"name\": \"Developpeur\" }");
         ResponseEntity<Role> response = template.postForEntity("/api/role", role, Role.class);
 
         Assert.assertEquals(200, response.getStatusCode().value());
         Assert.assertEquals("Developpeur", response.getBody().getName());
 
-        ResponseEntity<Role> response2=template.getForEntity("/api/role"+response.getBody().getName(),Role.class);
+        ResponseEntity<Role> response2=template.getForEntity("/api/role/"+response.getBody().getName(),Role.class);
         Assert.assertEquals(200,response2.getStatusCode().value());
 
 
-    }
+    }*/
 
     private HttpEntity<Object> getHttpEntity(Object body) {
         HttpHeaders headers = new HttpHeaders();
