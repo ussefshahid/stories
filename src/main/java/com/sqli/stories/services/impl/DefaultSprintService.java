@@ -24,8 +24,8 @@ public class DefaultSprintService implements SprintService {
     }
 
     @Override
-    public Sprint getById(Long id) {
-        return sprintRepository.getOne(id);
+    public Sprint getById(Long numero) {
+        return sprintRepository.getSprintByNumero(numero);
     }
 
     @Override

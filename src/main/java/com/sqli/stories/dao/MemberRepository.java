@@ -10,4 +10,6 @@ import java.util.List;
 public interface MemberRepository extends JpaRepository<Member, String> {
     @Query("SELECT m FROM Member m where m.firstName like :keyword or m.lastName like :keyword or m.login like :keyword")
     List<Member> searchByKeyword(@Param("keyword") String keyword);
+    @Query("SELECT m FROM Member  m WHERE m.login=:login")
+    Member getMemberByLogin(@Param("login") String login);
 }

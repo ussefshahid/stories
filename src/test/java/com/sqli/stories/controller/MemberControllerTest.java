@@ -93,8 +93,40 @@ public class MemberControllerTest {
 
         ResponseEntity<Member> response2=template.getForEntity("/api/member/"+response1.getBody().getLogin(),Member.class);
         Assert.assertEquals(200,response2.getStatusCode().value());
+        Assert.assertEquals("Hello",response2.getBody().getFirstName());
+
+        ResponseEntity<Member> response3=template.getForEntity("/api/member/notFound",Member.class);
+        Assert.assertEquals(404,response3.getStatusCode().value());
+
+        //cleaning the added members
+        memberService.delete(response1.getBody().getLogin());
 
 
+    }
+    @Test
+    public void testDeletingMember(){
+        HttpEntity<Object> member=getHttpEntity("{ \"login\":\"sqlir\",\"firstName\":\"Hello\",\"lastName\":\"world\"}");
+        ResponseEntity<Member> response1=template.postForEntity("/api/member",member, Member.class);
+        Assert.assertEquals(200,response1.getStatusCode().value());
+        Assert.assertEquals("sqlir",response1.getBody().getLogin());
+
+        HttpEntity<Object> member2=getHttpEntity("{ \"login\":\"sqlio\",\"firstName\":\"Hello1\",\"lastName\":\"world1\"}");
+        ResponseEntity<Member> response2=template.postForEntity("/api/member",member2, Member.class);
+        Assert.assertEquals(200,response2.getStatusCode().value());
+        Assert.assertEquals("sqlio",response2.getBody().getLogin());
+
+        ResponseEntity<ListMemberType> membersResponse=template.getForEntity("/api/members",ListMemberType.class);
+        Assert.assertEquals(200,membersResponse.getStatusCode().value());
+        Assert.assertEquals(2,membersResponse.getBody().size());
+
+        memberService.delete(response2.getBody().getLogin());
+
+        ResponseEntity<ListMemberType> membersResponseAfter=template.getForEntity("/api/members",ListMemberType.class);
+        Assert.assertEquals(200,membersResponseAfter.getStatusCode().value());
+        Assert.assertEquals(1,membersResponseAfter.getBody().size());
+
+        //cleaning the added members
+        memberService.delete(response1.getBody().getLogin());
     }
 
     private HttpEntity<Object> getHttpEntity(Object body) {
