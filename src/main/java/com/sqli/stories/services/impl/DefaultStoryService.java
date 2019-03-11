@@ -30,7 +30,7 @@ public class DefaultStoryService implements StoryService {
 
     @Override
     public Story getByKey(Long keyJira) {
-        return storyRepository.getOne(keyJira);
+        return storyRepository.getStoryByJiraKey(keyJira);
     }
 
     @Override

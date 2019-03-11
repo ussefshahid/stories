@@ -14,7 +14,6 @@ public abstract class StoryState {
     @OneToOne
     protected Story story;
 
-   public StoryState(){}
     public StoryState(Story story) {
         this.story = story;
     }

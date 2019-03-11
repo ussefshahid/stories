@@ -85,6 +85,17 @@ public class StroryControllerTest {
         //cleaning the added stories
         storyService.delete(response.getBody().getJiraKey());
         storyService.delete(response2.getBody().getJiraKey());
+    }
+    @Test
+    public void testGetStoryById(){
+        HttpEntity<Object> story=getHttpEntity("{\"jiraKey\":145 , \"title\":\"include all payment methods\",\"storyPoint\":10}");
+        ResponseEntity<Story> response=template.postForEntity("/api/story",story,Story.class);
+        Assert.assertEquals(200,response.getStatusCode().value());
+
+        ResponseEntity<Story> getStoryByIdResponse=template.getForEntity("/api/story/"+response.getBody().getJiraKey(),Story.class);
+        Assert.assertEquals(200,getStoryByIdResponse.getStatusCode().value());
+
+
 
     }
 

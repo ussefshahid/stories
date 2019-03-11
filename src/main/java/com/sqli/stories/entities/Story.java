@@ -23,9 +23,6 @@ public class Story implements Serializable {
     @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY)
     private List<Sprint> sprints;
 
-    public Story() {
-        this.storyState=StoryStateFactory.createToDoStoryState(this);
-    }
 
     public Story(Long jiraKey, String title, int storyPoint, int priority) {
         this.jiraKey = jiraKey;
