@@ -38,9 +38,9 @@ public class RoleController {
     }
 
     @DeleteMapping("/role/{id}")
-    public ResponseEntity<Void> delete(@PathVariable("id") String name) {
+    public ResponseEntity<Void> delete(@PathVariable("id") Long id) {
         try {
-            roleService.delete(name);
+            roleService.delete(id);
             return ResponseEntity.noContent().build();
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.notFound().build();
@@ -48,7 +48,11 @@ public class RoleController {
     }
 
     @GetMapping("/role/{id}")
-    public ResponseEntity<List<Role>> getById(@PathVariable("id") String name) {
-        return ResponseEntity.ok(roleService.getById(name));
+    public ResponseEntity<List<Role>> getByName(@PathVariable("id") String name) {
+        try {
+            return ResponseEntity.ok(roleService.getByName(name));
+        }catch (ResourceNotFoundException ex){
+            return ResponseEntity.notFound().build();
+        }
     }
 }

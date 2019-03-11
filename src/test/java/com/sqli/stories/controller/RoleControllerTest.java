@@ -1,7 +1,6 @@
 package com.sqli.stories.controller;
 
 import com.sqli.stories.entities.Role;
-import com.sqli.stories.entities.Team;
 import com.sqli.stories.services.RoleService;
 import org.junit.Assert;
 import org.junit.Before;
@@ -18,9 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import javax.swing.text.html.parser.Entity;
-import javax.xml.stream.events.EntityReference;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -48,10 +44,10 @@ public class RoleControllerTest {
         Assert.assertEquals("Developpeur", response.getBody().getName());
 
         // deleting the added team
-        roleService.delete(response.getBody().getName());
+        roleService.delete(response.getBody().getId());
     }
 
-    /*@Test
+    @Test
     public void testUpdateRole() throws Exception {
         HttpEntity<Object> role = getHttpEntity("{\"name\": \"Developpeur\" }");
         ResponseEntity<Role> response = template.postForEntity("/api/role", role, Role.class);
@@ -60,17 +56,18 @@ public class RoleControllerTest {
         int roleNumberBefore =roleService.getAll().size();
         Assert.assertEquals(1, roleNumberBefore);
 
-
-        HttpEntity<Object> updatedTeam = getHttpEntity("{,\"name\":\"Developpeur\"}");
-        ResponseEntity<Team> response2 = template.postForEntity("/api/team", updatedTeam, Team.class);
-        Assert.assertEquals("Developpeur", response2.getBody().getName());
+        /*
+        HttpEntity<Object> updatedRole = getHttpEntity("{\"id\":"+response.getBody().getId()+",\"name\":\"CP\"}");
+        ResponseEntity<Role> response2 = template.postForEntity("/api/role", updatedRole, Role.class);
+        Assert.assertEquals("CP", response2.getBody().getName());
         Assert.assertEquals(200, response2.getStatusCode().value());
         int teamNumbersAfter = roleService.getAll().size();
         Assert.assertEquals(1, teamNumbersAfter);
-
+         */
         // deleting the added team
-        roleService.delete(response2.getBody().getName());
-    }*/
+        roleService.delete(response.getBody().getId());
+    }
+
     @Test
     public void tesGetAllRoles() {
         HttpEntity<Object> role = getHttpEntity("{\"name\": \"Developpeur\" }");
@@ -90,8 +87,8 @@ public class RoleControllerTest {
         Assert.assertEquals(2, numberRoles);
 
         //deleting the added Role
-        roleService.delete(response.getBody().getName());
-        roleService.delete(response1.getBody().getName());
+        roleService.delete(response.getBody().getId());
+        roleService.delete(response1.getBody().getId());
     }
 
     @Test
@@ -108,14 +105,14 @@ public class RoleControllerTest {
         Assert.assertEquals(200, response1.getStatusCode().value());
         Assert.assertEquals("CP", response1.getBody().getName());
 
-        roleService.delete(response1.getBody().getName());
+        roleService.delete(response1.getBody().getId());
 
         Role role2 = roleService.getAll().get(0);
         Assert.assertEquals("Developpeur", role2.getName());
 
 
         //cleaning the added role
-        roleService.delete(role2.getName());
+        roleService.delete(role2.getId());
 
     }
 

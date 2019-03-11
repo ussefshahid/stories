@@ -26,8 +26,8 @@ public class DefaultRoleService implements RoleService {
     }
 
     @Override
-    public List<Role> getById(String name) {
-        return roleRepository.getById(name);
+    public List<Role> getByName(String name) {
+        return roleRepository.getByName(name);
     }
     @Override
     public List<Role> getAll() {
@@ -35,7 +35,7 @@ public class DefaultRoleService implements RoleService {
     }
 
     @Override
-    public void delete(String name) {
-        roleRepository.deleteById(name);
+    public void delete(Long id) {
+        roleRepository.deleteById(id);
     }
 }
