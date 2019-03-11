@@ -10,9 +10,6 @@ public interface StoryService {
     List<Story> getAll();
     Story getByKey(Long keyJira);
     void delete(long keyJira);
-    void toDo(Story story);
-    void inProgress(Story story);
-    void completed(Story story);
 
 
 

@@ -1,8 +1,6 @@
 package com.sqli.stories.controller;
 
 import com.sqli.stories.entities.Story;
-import com.sqli.stories.entities.state.StoryState;
-import com.sqli.stories.entities.state.ToDoState;
 import com.sqli.stories.helpers.types.ListStoryType;
 import com.sqli.stories.services.StoryService;
 import org.junit.Assert;

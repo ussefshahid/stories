@@ -54,19 +54,4 @@ public class StoryController {
                 .map(story -> ResponseEntity.ok().body(story))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
-    @PostMapping("/story/todo")
-    public void toDo(@RequestBody Story story) {
-        storyService.toDo(story);
-    }
-
-    @PostMapping("/story/inProgress")
-    public void inProgress(@RequestBody Story story) {
-        storyService.inProgress(story);
-    }
-
-    @PostMapping("/story/completed")
-    public void completed(@RequestBody Story story) {
-        storyService.completed(story);
-    }
 }
