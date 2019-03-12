@@ -21,12 +21,12 @@ public class Member implements Serializable {
         this.login = login;
     }
 
-    public Member(String login, String firstName, String lastName, LocalDate dateEntreeProjet, LocalDate dateSortieProjet) {
+    public Member(String login, String firstName, String lastName, LocalDate dateEntreeProjet) {
         this.login = login;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateEntreeProjet = dateEntreeProjet;
-        this.dateSortieProjet = dateSortieProjet;
+        this.dateSortieProjet = null;
     }
 
     public Member() {
