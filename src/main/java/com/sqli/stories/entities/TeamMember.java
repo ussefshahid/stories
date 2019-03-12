@@ -37,6 +37,10 @@ public class TeamMember implements Serializable {
     public TeamMember() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public Team getTeam() {
         return team;
     }

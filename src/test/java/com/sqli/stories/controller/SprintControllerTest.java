@@ -56,17 +56,17 @@ public class SprintControllerTest {
 
     @Test
     public void testUpdateSprint() {
-        LocalDate currentDate = LocalDate.now();
-        currentDate = currentDate.plusDays(1);
+
         HttpEntity<Object> sprint = getHttpEntity("{\"numero\": 123 ,\"dateDebut\":\"2019-03-12\" }");
         ResponseEntity<Sprint> response = template.postForEntity("/api/sprint", sprint, Sprint.class);
         Assert.assertEquals(200, response.getStatusCode().value());
+        LocalDate currentDate = LocalDate.of(2019,3,12);
         Assert.assertEquals(currentDate, response.getBody().getDateDebut());
 
         HttpEntity<Object> sprint2 = getHttpEntity("{\"numero\": 123 ,\"dateDebut\":\"2019-03-13\" }");
         ResponseEntity<Sprint> response2 = template.postForEntity("/api/sprint", sprint2, Sprint.class);
         Assert.assertEquals(200, response2.getStatusCode().value());
-        currentDate = currentDate.plusDays(1);
+        currentDate = LocalDate.of(2019,3,13);
         Assert.assertEquals(currentDate, response2.getBody().getDateDebut());
         int numbersOfSprints = sprintService.getAll().size();
         Assert.assertEquals(1, numbersOfSprints);

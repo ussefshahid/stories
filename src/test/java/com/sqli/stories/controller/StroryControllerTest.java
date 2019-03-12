@@ -93,7 +93,29 @@ public class StroryControllerTest {
         ResponseEntity<Story> getStoryByIdResponse=template.getForEntity("/api/story/"+response.getBody().getJiraKey(),Story.class);
         Assert.assertEquals(200,getStoryByIdResponse.getStatusCode().value());
 
+        ResponseEntity<Story> getUnexistingStory=template.getForEntity("/api/story/14598563",Story.class);
+        Assert.assertEquals(404,getUnexistingStory.getStatusCode().value());
 
+        //cleaning the added stories
+        storyService.delete(response.getBody().getJiraKey());
+
+    }
+    @Test
+    public void testDeletingStory(){
+        HttpEntity<Object> story=getHttpEntity("{\"jiraKey\":145 , \"title\":\"include all payment methods\",\"storyPoint\":10}");
+        ResponseEntity<Story> response=template.postForEntity("/api/story",story,Story.class);
+        Assert.assertEquals(200,response.getStatusCode().value());
+
+        ResponseEntity<ListStoryType> storiesResponseBeforeDeletingStory=template.getForEntity("/api/stories",ListStoryType.class);
+        Assert.assertEquals(200,storiesResponseBeforeDeletingStory.getStatusCode().value());
+        Assert.assertEquals(1,storiesResponseBeforeDeletingStory.getBody().size());
+
+        //deleting the story
+        storyService.delete(response.getBody().getJiraKey());
+
+        ResponseEntity<ListStoryType> storiesResponseAfterDeletingStory=template.getForEntity("/api/stories",ListStoryType.class);
+        Assert.assertEquals(200,storiesResponseAfterDeletingStory.getStatusCode().value());
+        Assert.assertEquals(0,storiesResponseAfterDeletingStory.getBody().size());
 
     }
 
