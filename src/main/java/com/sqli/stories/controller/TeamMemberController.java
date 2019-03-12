@@ -18,6 +18,7 @@ public class TeamMemberController {
     private TeamMemberService teamMemberService;
 
     @PostMapping("/teamMember")
+    @ResponseBody
     public ResponseEntity<TeamMember> add(@RequestBody TeamMember teamMember) {
         return Optional
                 .ofNullable(teamMemberService.add(teamMember))
@@ -32,7 +33,7 @@ public class TeamMemberController {
                 .orElseGet(() -> ResponseEntity.notFound().build() );
     }
 
-    @GetMapping("/teamMember")
+    @GetMapping("/teamMembers")
     public ResponseEntity<List<TeamMember>> getAll() {
         return ResponseEntity.ok(teamMemberService.getAll());
     }

@@ -128,6 +128,24 @@ public class MemberControllerTest {
         //cleaning the added members
         memberService.delete(response1.getBody().getLogin());
     }
+    @Test
+    public void testSearchMemberByKeyword(){
+        HttpEntity<Object> member=getHttpEntity("{ \"login\":\"sqlir\",\"firstName\":\"Hello\",\"lastName\":\"world\"}");
+        ResponseEntity<Member> response1=template.postForEntity("/api/member",member, Member.class);
+        Assert.assertEquals(200,response1.getStatusCode().value());
+        Assert.assertEquals("sqlir",response1.getBody().getLogin());
+
+        ResponseEntity<ListMemberType> membersResponse=template.getForEntity("/api/member/search/l",ListMemberType.class);
+        Assert.assertEquals(200,membersResponse.getStatusCode().value());
+        Assert.assertEquals(1,membersResponse.getBody().size());
+
+        ResponseEntity<ListMemberType> membersResponse2=template.getForEntity("/api/member/search/p",ListMemberType.class);
+        Assert.assertEquals(200,membersResponse2.getStatusCode().value());
+        Assert.assertEquals(0,membersResponse2.getBody().size());
+
+        //cleaning the added members
+        memberService.delete(response1.getBody().getLogin());
+    }
 
     private HttpEntity<Object> getHttpEntity(Object body) {
         HttpHeaders headers = new HttpHeaders();
