@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 @RestController
 public class TeamController {
@@ -33,9 +34,9 @@ public class TeamController {
     }
 
     @GetMapping("/team/search/{name}")
-    public ResponseEntity<Team> getByName(@PathVariable("name") String name) {
+    public ResponseEntity<List<Team>> getByName(@PathVariable("name") String name) {
         return Optional
-                .ofNullable( teamService.getByName(name) )
+                .ofNullable( teamService.getByName(String.valueOf("%"+name+"%")) )
                 .map(team -> ResponseEntity.ok().body(team))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

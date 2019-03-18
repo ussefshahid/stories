@@ -23,7 +23,7 @@ public class DefaultTeamService implements TeamService {
     }
 
     @Override
-    public Team getByName(String name) {
+    public List<Team> getByName(String name) {
         return teamRepository.findByName(name);
     }
 
