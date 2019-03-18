@@ -29,6 +29,11 @@ public class DefaultStoryService implements StoryService {
     }
 
     @Override
+    public List<Story> searchByKeyword(String keyword) {
+        return storyRepository.searchByKeyword(keyword);
+    }
+
+    @Override
     public Story getByKey(Long keyJira) {
         return storyRepository.getStoryByJiraKey(keyJira);
     }
