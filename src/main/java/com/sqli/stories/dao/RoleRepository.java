@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface RoleRepository extends JpaRepository<Role,Long> {
-    @Query("SELECT r FROM Role r where r.name=:name")
+    @Query("SELECT r FROM Role r where r.name like :name")
     List<Role> getByName(@Param("name") String name);
 }
