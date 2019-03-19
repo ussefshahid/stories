@@ -13,20 +13,19 @@ public class Story implements Serializable {
     private String title;
     private int storyPoint;
     private int priority;
-    private StoryState storyState;
+    private String storyState;
 
     @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY)
     private List<Sprint> sprints;
 
     public Story() {
-        this.storyState=StoryState.Todo;
     }
 
-    public Story(Long jiraKey, String title, int storyPoint, int priority) {
+    public Story(Long jiraKey, String title, int storyPoint, int priority, String storyState) {
         this.jiraKey = jiraKey;
         this.title = title;
         this.storyPoint = storyPoint;
-        this.storyState = StoryState.Todo;
+        this.storyState = storyState;
         this.priority = priority;
     }
 
@@ -67,11 +66,11 @@ public class Story implements Serializable {
         sprints.add(sprint);
     }
 
-    public StoryState getStoryState() {
+    public String getStoryState() {
         return storyState;
     }
 
-    public void setStoryState(StoryState storyState) {
+    public void setStoryState(String storyState) {
         this.storyState = storyState;
     }
 
