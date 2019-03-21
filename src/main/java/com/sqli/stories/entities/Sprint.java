@@ -22,11 +22,7 @@ public class Sprint implements Serializable {
 
     public Sprint(Long numero, LocalDate dateDebut, LocalDate dateFin) {
         this.numero = numero;
-        if (dateDebut == null) {
-            this.dateDebut=LocalDate.now();
-        }else{
-            this.dateDebut=dateDebut;
-        }
+        this.dateDebut=dateDebut;
         this.dateFin = dateFin;
     }
 
