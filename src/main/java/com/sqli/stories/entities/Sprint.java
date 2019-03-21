@@ -12,6 +12,7 @@ import java.util.Objects;
 public class Sprint implements Serializable {
     @Id
     private Long numero;
+    private String designation;
     private LocalDate dateDebut;
     private LocalDate dateFin;
 
@@ -54,6 +55,14 @@ public class Sprint implements Serializable {
         this.dateFin = dateFin;
     }
 
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
     @Override
     public String toString() {
         return "Sprint{" +
@@ -67,6 +76,7 @@ public class Sprint implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Sprint sprint = (Sprint) o;
         return Objects.equals(numero, sprint.numero) &&
+                Objects.equals(designation, sprint.designation) &&
                 Objects.equals(dateDebut, sprint.dateDebut) &&
                 Objects.equals(dateFin, sprint.dateFin) &&
                 Objects.equals(stories, sprint.stories);
@@ -74,6 +84,6 @@ public class Sprint implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(numero, dateDebut, dateFin, stories);
+        return Objects.hash(numero, designation, dateDebut, dateFin, stories);
     }
 }

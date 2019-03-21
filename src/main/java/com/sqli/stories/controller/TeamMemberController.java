@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-
 @RequestMapping("/api")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class TeamMemberController {
     @Autowired
@@ -23,14 +23,15 @@ public class TeamMemberController {
         return Optional
                 .ofNullable(teamMemberService.add(teamMember))
                 .map(addedTeamMember -> ResponseEntity.ok().body(addedTeamMember))
-                .orElseGet(() -> ResponseEntity.notFound().build() );
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
+
     @PutMapping("/teamMember")
     public ResponseEntity<TeamMember> updateTeam(@RequestBody TeamMember teamMember) {
         return Optional
                 .ofNullable(teamMemberService.update(teamMember))
                 .map(updatedTeamMember -> ResponseEntity.ok().body(updatedTeamMember))
-                .orElseGet(() -> ResponseEntity.notFound().build() );
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/teamMembers")
@@ -39,20 +40,20 @@ public class TeamMemberController {
     }
 
     @GetMapping("/teamMember/{id}")
-    public ResponseEntity<TeamMember> getById(@PathVariable("id") Long id){
+    public ResponseEntity<TeamMember> getById(@PathVariable("id") Long id) {
         return Optional
-                .ofNullable( teamMemberService.getById(id) )
+                .ofNullable(teamMemberService.getById(id))
                 .map(teamMember -> ResponseEntity.ok().body(teamMember))
-                .orElseGet(() -> ResponseEntity.notFound().build() );
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/teamMember/{id}")
     public ResponseEntity<Void> deleteTeam(@PathVariable("id") Long id) {
-        try{
+        try {
             teamMemberService.delete(id);
             return ResponseEntity.noContent().build();
-        }catch(ResourceNotFoundException ex){
-        return ResponseEntity.notFound().build();
+        } catch (ResourceNotFoundException ex) {
+            return ResponseEntity.notFound().build();
         }
 
     }
