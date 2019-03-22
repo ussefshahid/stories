@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 @RestController
 public class StoryController {
@@ -36,11 +35,6 @@ public class StoryController {
     @GetMapping("/stories")
     public ResponseEntity<List<Story>> getAll() {
         return ResponseEntity.ok(storyService.getAll());
-    }
-
-    @GetMapping("/story/search/{keyword}")
-    public ResponseEntity<List<Story>> searchByKeyword(@PathVariable("keyword") String keyword) {
-        return ResponseEntity.ok(storyService.searchByKeyword(String.valueOf("%"+keyword+"%")));
     }
 
     @DeleteMapping("/story/{id}")

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin("*")
 @RequestMapping("/api")
 @RestController
 public class RoleController {
@@ -51,7 +50,7 @@ public class RoleController {
     @GetMapping("/role/{name}")
     public ResponseEntity<List<Role>> getByName(@PathVariable("name") String name) {
         try {
-            return ResponseEntity.ok(roleService.getByName(String.valueOf("%"+name+"%")));
+            return ResponseEntity.ok(roleService.getByName(name));
         }catch (ResourceNotFoundException ex){
             return ResponseEntity.notFound().build();
         }
