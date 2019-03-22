@@ -12,6 +12,7 @@ import java.util.Objects;
 public class Sprint implements Serializable {
     @Id
     private Long numero;
+    private String designation;
     private LocalDate dateDebut;
     private LocalDate dateFin;
 
@@ -48,6 +49,14 @@ public class Sprint implements Serializable {
 
     public LocalDate getDateFin() {
         return dateFin;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
     public void setDateFin(LocalDate dateFin) {
