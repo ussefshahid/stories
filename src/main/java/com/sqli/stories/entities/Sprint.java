@@ -63,14 +63,6 @@ public class Sprint implements Serializable {
         this.dateFin = dateFin;
     }
 
-    public String getDesignation() {
-        return designation;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
-
     @Override
     public String toString() {
         return "Sprint{" +

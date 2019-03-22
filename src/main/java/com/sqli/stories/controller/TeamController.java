@@ -33,7 +33,7 @@ public class TeamController {
     }
 
     @GetMapping("/team/search/{name}")
-    public ResponseEntity<Team> getByName(@PathVariable("name") String name) {
+    public ResponseEntity<List<Team>> getByName(@PathVariable("name") String name) {
         return Optional
                 .ofNullable( teamService.getByName(name) )
                 .map(team -> ResponseEntity.ok().body(team))
