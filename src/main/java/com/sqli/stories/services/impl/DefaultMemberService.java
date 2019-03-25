@@ -38,6 +38,11 @@ public class DefaultMemberService implements MemberService {
     }
 
     @Override
+    public boolean existsByLogin(String login) {
+        return memberRepository.existsByLogin(login);
+    }
+
+    @Override
     public void delete(String login) {
     memberRepository.deleteById(login);
     }
