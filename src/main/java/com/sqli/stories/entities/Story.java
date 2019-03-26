@@ -1,6 +1,7 @@
 package com.sqli.stories.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -10,6 +11,7 @@ import java.util.Objects;
 public class Story implements Serializable {
     @Id
     private Long jiraKey;
+    @NotBlank
     private String title;
     private int storyPoint;
     private int priority;

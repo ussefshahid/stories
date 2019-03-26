@@ -1,11 +1,10 @@
 package com.sqli.stories.entities;
 
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -14,8 +13,13 @@ import java.util.Objects;
 @Table(name = "members")
 public class Member implements Serializable {
     @Id
+    @Size(min = 4)
     private String login;
+    @Pattern(regexp = "^[a-zA-Z][a-zA-Z ]+$",message = "first name contains only characters")
+    @Size(min = 3)
     private String firstName;
+    @Pattern(regexp = "^[a-zA-Z][a-zA-Z ]+$",message = "last name contains only characters ")
+    @Size(min = 3)
     private String lastName;
     private LocalDate dateEntreeProjet;
     private LocalDate dateSortieProjet;
