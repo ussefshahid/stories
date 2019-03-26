@@ -1,6 +1,8 @@
 package com.sqli.stories.controller;
 
 import com.sqli.stories.entities.Sprint;
+import com.sqli.stories.helpers.payload.SprintBiggerExistingKey;
+import com.sqli.stories.helpers.payload.SprintIdentityAvailability;
 import com.sqli.stories.services.SprintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -55,5 +57,16 @@ public class SprintController {
                 .ofNullable(sprintService.getById(id))
                 .map(sprint -> ResponseEntity.ok().body(sprint))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    @GetMapping("/sprint/checkSprintKeyAvailability")
+    public ResponseEntity<SprintIdentityAvailability> checkSprintKeyAvailabilty(@RequestParam("key") Long numero){
+    boolean isAvailable=!sprintService.existsByNumero(numero);
+    return ResponseEntity.ok(new SprintIdentityAvailability(isAvailable));
+    }
+
+    @GetMapping("/sprint/sprintBiggerKey")
+    public ResponseEntity<SprintBiggerExistingKey> getBiggerSprintKey(){
+        Long key=sprintService.getBiggerExistSprintKey();
+        return ResponseEntity.ok(new SprintBiggerExistingKey(key));
     }
 }

@@ -1,6 +1,6 @@
 package com.sqli.stories.controller;
 
-import com.sqli.stories.dao.TeamRepository;
+import com.sqli.stories.repository.TeamRepository;
 import com.sqli.stories.entities.Team;
 import com.sqli.stories.helpers.types.ListTeamType;
 import com.sqli.stories.services.TeamService;

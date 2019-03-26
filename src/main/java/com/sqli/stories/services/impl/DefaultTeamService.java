@@ -1,6 +1,6 @@
 package com.sqli.stories.services.impl;
 
-import com.sqli.stories.dao.TeamRepository;
+import com.sqli.stories.repository.TeamRepository;
 import com.sqli.stories.entities.Team;
 import com.sqli.stories.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
