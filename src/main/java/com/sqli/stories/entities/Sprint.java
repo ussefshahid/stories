@@ -54,6 +54,24 @@ public class Sprint implements Serializable {
         this.dateFin = dateFin;
     }
 
+    public List<Story> getStories() {
+        return stories;
+    }
+   public void addStoryToSprint(Story story){
+        this.stories.add(story);
+   }
+   public void removeStoryFromSprint(Story story){
+        this.stories.remove(story);
+   }
+    public void addStory(Story story){
+        addStoryToSprint(story);
+        story.addSprintToStory(this);
+    }
+    public void removeStory(Story story){
+        removeStoryFromSprint(story);
+        story.removeSprintFromStory(this);
+    }
+
     @Override
     public String toString() {
         return "Sprint{" +

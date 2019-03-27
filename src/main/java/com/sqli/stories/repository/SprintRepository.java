@@ -1,9 +1,12 @@
 package com.sqli.stories.repository;
 
 import com.sqli.stories.entities.Sprint;
+import com.sqli.stories.entities.Story;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
+import java.util.List;
 
 public interface SprintRepository extends JpaRepository<Sprint, Long> {
     @Query("SELECT s FROM Sprint s WHERE s.numero=:numero")
@@ -13,4 +16,5 @@ public interface SprintRepository extends JpaRepository<Sprint, Long> {
 
     @Query("SELECT MAX(s.numero) as numero FROM Sprint s")
     Long getBiggerExistSprintKey();
+
 }

@@ -3,6 +3,7 @@ package com.sqli.stories.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,7 +19,7 @@ public class Story implements Serializable {
     private String storyState;
 
     @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY)
-    private List<Sprint> sprints;
+    private List<Sprint> sprints=new ArrayList<>();
 
     public Story() {
     }
@@ -64,10 +65,6 @@ public class Story implements Serializable {
         this.priority = priority;
     }
 
-    public void addSprint(Sprint sprint) {
-        sprints.add(sprint);
-    }
-
     public String getStoryState() {
         return storyState;
     }
@@ -75,6 +72,27 @@ public class Story implements Serializable {
     public void setStoryState(String storyState) {
         this.storyState = storyState;
     }
+
+    public void addSprintToStory(Sprint sprint){
+        sprints.add(sprint);
+    }
+    public void removeSprintFromStory(Sprint sprint){
+     sprints.remove(sprint);
+    }
+    public void addSprint(Sprint sprint){
+        addSprintToStory(sprint);
+        sprint.addStoryToSprint(this);
+    }
+
+    public void removeSprint(Sprint sprint){
+         removeSprintFromStory(sprint);
+        sprint.removeStoryFromSprint(this);
+    }
+
+    public List<Sprint> getSprints() {
+        return sprints;
+    }
+
 
     @Override
     public String toString() {
