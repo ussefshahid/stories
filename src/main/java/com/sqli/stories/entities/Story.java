@@ -2,6 +2,7 @@ package com.sqli.stories.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,6 +15,13 @@ public class Story implements Serializable {
     private int storyPoint;
     private int priority;
     private String storyState;
+    @OneToOne
+    private Sprint sprintPLAN;
+    @OneToOne
+    private Sprint sprintDONE;
+    @OneToOne
+    private Team team;
+    private int forecast;
 
     @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY)
     private List<Sprint> sprints;
@@ -27,6 +35,7 @@ public class Story implements Serializable {
         this.storyPoint = storyPoint;
         this.storyState = storyState;
         this.priority = priority;
+        this.sprints=new ArrayList<>();
     }
 
     public Long getJiraKey() {
@@ -45,6 +54,29 @@ public class Story implements Serializable {
         this.title = title;
     }
 
+    public List<Sprint> getSprints() {
+        return sprints;
+    }
+
+    public Sprint getSprintPLAN() {
+        return sprintPLAN;
+    }
+
+    public void setSprintPLAN(Sprint sprintPLAN) {
+        this.sprintPLAN = sprintPLAN;
+    }
+
+    public void setSprints(List<Sprint> sprints) {
+        this.sprints = sprints;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
 
     public int getStoryPoint() {
         return storyPoint;
@@ -72,6 +104,22 @@ public class Story implements Serializable {
 
     public void setStoryState(String storyState) {
         this.storyState = storyState;
+    }
+
+    public int getForecast() {
+        return forecast;
+    }
+
+    public void setForecast(int forecast) {
+        this.forecast = forecast;
+    }
+
+    public Sprint getSprintDONE() {
+        return sprintDONE;
+    }
+
+    public void setSprintDONE(Sprint sprintDONE) {
+        this.sprintDONE = sprintDONE;
     }
 
     @Override
