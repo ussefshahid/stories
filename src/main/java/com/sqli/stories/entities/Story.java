@@ -1,5 +1,7 @@
 package com.sqli.stories.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
@@ -18,7 +20,7 @@ public class Story implements Serializable {
     private int priority;
     private String storyState;
 
-    @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY , cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private List<Sprint> sprints=new ArrayList<>();
 
     public Story() {

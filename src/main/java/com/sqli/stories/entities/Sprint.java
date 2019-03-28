@@ -1,5 +1,7 @@
 package com.sqli.stories.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -54,6 +56,7 @@ public class Sprint implements Serializable {
         this.dateFin = dateFin;
     }
 
+    @JsonIgnore
     public List<Story> getStories() {
         return stories;
     }

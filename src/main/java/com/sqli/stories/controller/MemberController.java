@@ -3,7 +3,6 @@ package com.sqli.stories.controller;
 import com.sqli.stories.entities.Member;
 import com.sqli.stories.helpers.payload.MemberIdentityAvailability;
 import com.sqli.stories.services.MemberService;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
