@@ -1,6 +1,6 @@
 package com.sqli.stories.services.impl;
 
-import com.sqli.stories.dao.MemberRepository;
+import com.sqli.stories.repository.MemberRepository;
 import com.sqli.stories.entities.Member;
 import com.sqli.stories.services.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +35,11 @@ public class DefaultMemberService implements MemberService {
     @Override
     public List<Member> getAll() {
         return memberRepository.findAll();
+    }
+
+    @Override
+    public boolean existsByLogin(String login) {
+        return memberRepository.existsByLogin(login);
     }
 
     @Override

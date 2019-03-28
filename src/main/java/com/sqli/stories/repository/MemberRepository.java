@@ -1,4 +1,4 @@
-package com.sqli.stories.dao;
+package com.sqli.stories.repository;
 
 import com.sqli.stories.entities.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,4 +12,6 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     List<Member> searchByKeyword(@Param("keyword") String keyword);
     @Query("SELECT m FROM Member  m WHERE m.login=:login")
     Member getMemberByLogin(@Param("login") String login);
+
+    boolean existsByLogin(String login);
 }

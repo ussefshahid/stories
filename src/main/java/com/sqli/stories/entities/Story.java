@@ -11,6 +11,7 @@ import java.util.Objects;
 public class Story implements Serializable {
     @Id
     private Long jiraKey;
+    @NotBlank
     private String title;
     private int storyPoint;
     private int priority;
@@ -94,10 +95,6 @@ public class Story implements Serializable {
         this.priority = priority;
     }
 
-    public void addSprint(Sprint sprint) {
-        sprints.add(sprint);
-    }
-
     public String getStoryState() {
         return storyState;
     }
@@ -120,6 +117,22 @@ public class Story implements Serializable {
 
     public void setSprintDONE(Sprint sprintDONE) {
         this.sprintDONE = sprintDONE;
+    }
+
+    public void addSprintToStory(Sprint sprint){
+        sprints.add(sprint);
+    }
+    public void removeSprintFromStory(Sprint sprint){
+        sprints.remove(sprint);
+    }
+    public void addSprint(Sprint sprint){
+        addSprintToStory(sprint);
+        sprint.addStoryToSprint(this);
+    }
+
+    public void removeSprint(Sprint sprint){
+        removeSprintFromStory(sprint);
+        sprint.removeStoryFromSprint(this);
     }
 
     @Override

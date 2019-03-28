@@ -1,4 +1,4 @@
-package com.sqli.stories.dao;
+package com.sqli.stories.repository;
 
 import com.sqli.stories.entities.Team;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,5 +1,6 @@
 package com.sqli.stories.controller;
 
+import com.sqli.stories.entities.Sprint;
 import com.sqli.stories.entities.Story;
 import com.sqli.stories.services.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,5 +70,9 @@ public class StoryController {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+    @PostMapping("/story/{id}")
+    public Story addSprintToStory(@PathVariable("id") Long jiraKey,@RequestBody Sprint sprint) {
+        return storyService.addSprintToStory(jiraKey, sprint);
     }
 }

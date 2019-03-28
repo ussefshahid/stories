@@ -1,14 +1,12 @@
 package com.sqli.stories.services.impl;
 
-import com.sqli.stories.dao.TeamMemberRepository;
+import com.sqli.stories.repository.TeamMemberRepository;
 import com.sqli.stories.entities.TeamMember;
 import com.sqli.stories.services.TeamMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DefaultTeamMemberService implements TeamMemberService {

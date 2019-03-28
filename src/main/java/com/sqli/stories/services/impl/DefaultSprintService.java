@@ -1,12 +1,11 @@
 package com.sqli.stories.services.impl;
 
-import com.sqli.stories.dao.SprintRepository;
+import com.sqli.stories.repository.SprintRepository;
 import com.sqli.stories.entities.Sprint;
 import com.sqli.stories.services.SprintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 @Service
 public class DefaultSprintService implements SprintService {
@@ -31,6 +30,16 @@ public class DefaultSprintService implements SprintService {
     @Override
     public List<Sprint> getAll() {
         return sprintRepository.findAll();
+    }
+
+    @Override
+    public boolean existsByNumero(Long numero) {
+        return sprintRepository.existsByNumero(numero);
+    }
+
+    @Override
+    public Long getBiggerExistSprintKey() {
+        return sprintRepository.getBiggerExistSprintKey();
     }
 
     @Override

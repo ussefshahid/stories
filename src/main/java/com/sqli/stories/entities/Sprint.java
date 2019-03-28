@@ -1,5 +1,7 @@
 package com.sqli.stories.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,7 +14,6 @@ import java.util.Objects;
 public class Sprint implements Serializable {
     @Id
     private Long numero;
-    private String designation;
     private LocalDate dateDebut;
     private LocalDate dateFin;
 
@@ -51,16 +52,27 @@ public class Sprint implements Serializable {
         return dateFin;
     }
 
-    public String getDesignation() {
-        return designation;
-    }
-
-    public void setDesignation(String designation) {
-        this.designation = designation;
-    }
-
     public void setDateFin(LocalDate dateFin) {
         this.dateFin = dateFin;
+    }
+
+    @JsonIgnore
+    public List<Story> getStories() {
+        return stories;
+    }
+   public void addStoryToSprint(Story story){
+        this.stories.add(story);
+   }
+   public void removeStoryFromSprint(Story story){
+        this.stories.remove(story);
+   }
+    public void addStory(Story story){
+        addStoryToSprint(story);
+        story.addSprintToStory(this);
+    }
+    public void removeStory(Story story){
+        removeStoryFromSprint(story);
+        story.removeSprintFromStory(this);
     }
 
     @Override
@@ -76,7 +88,6 @@ public class Sprint implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Sprint sprint = (Sprint) o;
         return Objects.equals(numero, sprint.numero) &&
-                Objects.equals(designation, sprint.designation) &&
                 Objects.equals(dateDebut, sprint.dateDebut) &&
                 Objects.equals(dateFin, sprint.dateFin) &&
                 Objects.equals(stories, sprint.stories);
@@ -84,6 +95,6 @@ public class Sprint implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(numero, designation, dateDebut, dateFin, stories);
+        return Objects.hash(numero, dateDebut, dateFin, stories);
     }
 }

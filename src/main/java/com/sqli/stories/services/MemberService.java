@@ -10,5 +10,6 @@ public interface MemberService {
     Member update(Member member);
     List<Member> searchByKeyword(String keyword);
     List<Member> getAll();
+    boolean existsByLogin(String login);
     void delete(String login);
 }

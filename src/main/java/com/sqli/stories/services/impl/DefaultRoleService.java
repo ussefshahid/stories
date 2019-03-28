@@ -1,14 +1,12 @@
 package com.sqli.stories.services.impl;
 
-import com.sqli.stories.dao.RoleRepository;
+import com.sqli.stories.repository.RoleRepository;
 import com.sqli.stories.entities.Role;
 import com.sqli.stories.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.management.Query;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class DefaultRoleService implements RoleService {
