@@ -72,7 +72,11 @@ public class StoryController {
         }
     }
     @PostMapping("/story/{id}")
-    public Story addSprintToStory(@PathVariable("id") Long jiraKey,@RequestBody Sprint sprint) {
-        return storyService.addSprintToStory(jiraKey, sprint);
+    public ResponseEntity<Story> addSprintToStory(@PathVariable("id") Long jiraKey,@RequestBody Sprint sprint) {
+        try {
+            return ResponseEntity.ok(storyService.addSprintToStory(jiraKey,sprint));
+        }catch (ResourceNotFoundException ex){
+            return ResponseEntity.notFound().build();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.sqli.stories.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class Story implements Serializable {
     private Team team;
     private int forecast;
 
-    @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
     private List<Sprint> sprints;
 
     public Story() {
