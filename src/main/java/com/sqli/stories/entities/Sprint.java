@@ -17,7 +17,7 @@ public class Sprint implements Serializable {
     private LocalDate dateDebut;
     private LocalDate dateFin;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name="Sprint_Story",joinColumns=@JoinColumn(name="numero"),
             inverseJoinColumns=@JoinColumn(name="jiraKey"))
     private List<Story> stories = new ArrayList<>();
@@ -60,6 +60,7 @@ public class Sprint implements Serializable {
     public List<Story> getStories() {
         return stories;
     }
+
    public void addStoryToSprint(Story story){
         this.stories.add(story);
    }
