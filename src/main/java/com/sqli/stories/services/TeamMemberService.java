@@ -10,4 +10,5 @@ public interface TeamMemberService {
     void delete(Long id);
     TeamMember getById(Long id);
     List<TeamMember> getAll();
+    List<TeamMember> getByTeam(Long id);
 }
