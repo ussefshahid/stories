@@ -3,7 +3,9 @@ package com.sqli.stories.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -40,6 +42,7 @@ public class Story implements Serializable {
         this.storyState = storyState;
         this.priority = priority;
         this.sprints=new ArrayList<>();
+
     }
 
     public Long getJiraKey() {
@@ -143,6 +146,7 @@ public class Story implements Serializable {
         removeSprintFromStory(sprint);
         sprint.removeStoryFromSprint(this);
     }
+
 
     @Override
     public String toString() {
