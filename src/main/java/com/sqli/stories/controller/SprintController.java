@@ -1,6 +1,7 @@
 package com.sqli.stories.controller;
 
 import com.sqli.stories.entities.Sprint;
+import com.sqli.stories.entities.Story;
 import com.sqli.stories.helpers.payload.SprintBiggerExistingKey;
 import com.sqli.stories.helpers.payload.SprintIdentityAvailability;
 import com.sqli.stories.services.SprintService;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RequestMapping("/api")
 @RestController
 public class SprintController {
+
     @Autowired
     private SprintService sprintService;
 
@@ -68,5 +70,9 @@ public class SprintController {
     public ResponseEntity<SprintBiggerExistingKey> getBiggerSprintKey(){
         Long key=sprintService.getBiggerExistSprintKey();
         return ResponseEntity.ok(new SprintBiggerExistingKey(key));
+    }
+    @GetMapping("/sprint/{id}/stories")
+    public ResponseEntity<List<Story>> getStoryBySprintKey(@PathVariable("id") Long sprintKey) {
+        return ResponseEntity.ok(sprintService.getStoryBySprintKey(sprintKey));
     }
 }

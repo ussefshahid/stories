@@ -25,7 +25,7 @@ public class Story implements Serializable {
     private Team team;
     private int forecast;
 
-    @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST,CascadeType.MERGE})
+    @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Sprint> sprints;
 
     public Story() {
@@ -55,7 +55,6 @@ public class Story implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
-
     public List<Sprint> getSprints() {
         return sprints;
     }
@@ -71,6 +70,13 @@ public class Story implements Serializable {
     public void setSprints(List<Sprint> sprints) {
         this.sprints = sprints;
     }
+    public Sprint getCurrentSprint(){
+        if(sprints!=null && !sprints.isEmpty()) {
+            return this.sprints.get(sprints.size() - 1);
+        }
+        return null;
+    }
+
 
     public Team getTeam() {
         return team;
