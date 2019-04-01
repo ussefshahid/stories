@@ -17,9 +17,7 @@ public class Sprint implements Serializable {
     private LocalDate dateDebut;
     private LocalDate dateFin;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name="Sprint_Story",joinColumns=@JoinColumn(name="numero"),
-            inverseJoinColumns=@JoinColumn(name="jiraKey"))
+    @ManyToMany(mappedBy = "sprints", fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.REFRESH,CascadeType.REMOVE})
     private List<Story> stories = new ArrayList<>();
 
     public Sprint(Long numero, LocalDate dateDebut, LocalDate dateFin) {
@@ -68,8 +66,9 @@ public class Sprint implements Serializable {
         this.stories.remove(story);
    }
     public void addStory(Story story){
+        story.addSprint(this);
         addStoryToSprint(story);
-        story.addSprintToStory(this);
+
     }
     public void removeStory(Story story){
         removeStoryFromSprint(story);

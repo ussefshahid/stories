@@ -1,16 +1,14 @@
 package com.sqli.stories.services.impl;
 
 import com.sqli.stories.entities.Sprint;
+import com.sqli.stories.entities.Story;
 import com.sqli.stories.repository.SprintRepository;
 import com.sqli.stories.repository.StoryRepository;
-import com.sqli.stories.entities.Story;
 import com.sqli.stories.services.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class DefaultStoryService implements StoryService {

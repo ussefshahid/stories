@@ -25,8 +25,10 @@ public class Story implements Serializable {
     private Team team;
     private int forecast;
 
-    @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<Sprint> sprints;
+    @ManyToMany(cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.REFRESH,CascadeType.REMOVE})
+    @JoinTable(name="story_sprint",joinColumns={@JoinColumn(name="jiraKey")},
+            inverseJoinColumns={@JoinColumn(name="numero")})
+    private List<Sprint> sprints=new ArrayList<>();
 
     public Story() {
     }
