@@ -57,4 +57,9 @@ public class TeamMemberController {
         }
 
     }
+
+    @GetMapping("/teamMembers/team/{id}")
+    public ResponseEntity<List<TeamMember>> getByTeam(@PathVariable("id") Long id){
+        return ResponseEntity.ok(teamMemberService.getByTeam(id));
+    }
 }

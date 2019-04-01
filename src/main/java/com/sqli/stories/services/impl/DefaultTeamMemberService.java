@@ -37,4 +37,9 @@ public class DefaultTeamMemberService implements TeamMemberService {
     public List<TeamMember> getAll() {
         return teamMemberRepository.findAll();
     }
+
+    @Override
+    public List<TeamMember> getByTeam(Long id) {
+        return teamMemberRepository.getByTeam(id);
+    }
 }
