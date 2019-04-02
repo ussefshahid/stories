@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class DefaultSprintService implements SprintService {
@@ -50,10 +49,7 @@ public class DefaultSprintService implements SprintService {
 
     @Override
     public List<Story> getStoryBySprintKey(Long sprintKey) {
-        List<Story> stories;
-        List<Story> listStories=storyRepository.findAll();
-        stories= listStories.stream().filter(e->e.getCurrentSprint()!=null && e.getCurrentSprint().getNumero()==sprintKey).collect(Collectors.toList());
-        return stories;
+        return storyRepository.getStoriesBySprintKey(sprintKey);
     }
 
     @Override

@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +62,7 @@ public class StoryController {
 
     @PutMapping("/stories")
     @Transactional
-    public ResponseEntity updateAll(@RequestBody Story[] stories){
+    public ResponseEntity updateAll(@RequestBody Story[] stories) {
         try {
             System.out.println(stories);
             Arrays.stream(stories)
@@ -71,13 +72,13 @@ public class StoryController {
             return ResponseEntity.notFound().build();
         }
     }
+
     @PostMapping("/story/{id}")
-    public ResponseEntity<Story> addSprintToStory(@PathVariable("id") Long jiraKey,@RequestBody Sprint sprint) {
+    public ResponseEntity<Story> addSprintToStory(@PathVariable("id") Long jiraKey, @RequestBody Sprint sprint) {
         try {
-            return ResponseEntity.ok(storyService.addSprintToStory(jiraKey,sprint));
-        }catch (ResourceNotFoundException ex){
+            return ResponseEntity.ok(storyService.addSprintToStory(jiraKey, sprint));
+        } catch (ResourceNotFoundException ex) {
             return ResponseEntity.notFound().build();
         }
     }
-    
 }

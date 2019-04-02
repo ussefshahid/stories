@@ -2,6 +2,7 @@ package com.sqli.stories.services;
 
 import com.sqli.stories.entities.Sprint;
 import com.sqli.stories.entities.Story;
+import com.sqli.stories.entities.StorySprint;
 
 import java.util.List;
 
