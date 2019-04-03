@@ -2,7 +2,7 @@ package com.sqli.stories.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -17,8 +17,10 @@ public class TeamMember implements Serializable {
     private Member member;
     @OneToOne
     private Role role;
-    private LocalDate dateEntree;
-    private LocalDate dateSortie;
+    @Temporal(TemporalType.DATE)
+    private Date dateEntree;
+    @Temporal(TemporalType.DATE)
+    private Date dateSortie;
 
     public TeamMember(Team team, Member member, Role role) {
         this.team = team;
@@ -26,7 +28,7 @@ public class TeamMember implements Serializable {
         this.role = role;
     }
 
-    public TeamMember(Team team, Member member, Role role, LocalDate dateEntree, LocalDate dateSortie) {
+    public TeamMember(Team team, Member member, Role role, Date dateEntree, Date dateSortie) {
         this.team = team;
         this.member = member;
         this.role = role;
@@ -65,28 +67,31 @@ public class TeamMember implements Serializable {
         this.role = role;
     }
 
-    public LocalDate getDateEntree() {
+    public Date getDateEntree() {
         return dateEntree;
     }
 
-    public void setDateEntree(LocalDate dateEntree) {
+    public void setDateEntree(Date dateEntree) {
         this.dateEntree = dateEntree;
     }
 
-    public LocalDate getDateSortie() {
+    public Date getDateSortie() {
         return dateSortie;
     }
 
-    public void setDateSortie(LocalDate dateSortie) {
+    public void setDateSortie(Date dateSortie) {
         this.dateSortie = dateSortie;
     }
 
     @Override
     public String toString() {
         return "TeamMember{" +
-                "team=" + team +
+                "id=" + id +
+                ", team=" + team +
                 ", member=" + member +
                 ", role=" + role +
+                ", dateEntree=" + dateEntree +
+                ", dateSortie=" + dateSortie +
                 '}';
     }
 
