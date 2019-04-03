@@ -14,5 +14,8 @@ public interface StoryRepository extends JpaRepository<Story, Long> {
     @Query("SELECT s FROM Story s WHERE s.title like :keyword")
     List<Story> searchByKeyword(@Param("keyword") String keyword);
 
+    @Query("SELECT s FROM Story s WHERE  s.currentSprint.numero=:sprintKey")
+    List<Story> getStoriesBySprintKey(@Param("sprintKey") Long sprintKey);
+
 
 }

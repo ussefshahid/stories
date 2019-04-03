@@ -1,16 +1,17 @@
 package com.sqli.stories.services.impl;
 
 import com.sqli.stories.entities.Sprint;
+import com.sqli.stories.entities.Story;
+import com.sqli.stories.entities.StorySprint;
+import com.sqli.stories.helpers.factory.SprintStoryFactory;
 import com.sqli.stories.repository.SprintRepository;
 import com.sqli.stories.repository.StoryRepository;
-import com.sqli.stories.entities.Story;
+import com.sqli.stories.repository.StorySprintRepository;
 import com.sqli.stories.services.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class DefaultStoryService implements StoryService {
@@ -18,6 +19,8 @@ public class DefaultStoryService implements StoryService {
     private StoryRepository storyRepository;
     @Autowired
     private SprintRepository sprintRepository;
+    @Autowired
+    private StorySprintRepository storySprintRepository;
 
     @Override
     public Story add(Story story) {
@@ -48,8 +51,10 @@ public class DefaultStoryService implements StoryService {
     public Story addSprintToStory(Long jiraKey, Sprint sprint) {
         sprintRepository.save(sprint);
         Story story=this.getByKey(jiraKey);
-        story.addSprint(sprint);
-        return this.add(story);
+        story.setCurrentSprint(sprint);
+        StorySprint storySprint= SprintStoryFactory.createStorySprint(sprint,story);
+        storySprintRepository.save(storySprint);
+        return add(story);
     }
 
     @Override

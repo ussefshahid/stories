@@ -1,12 +1,10 @@
 package com.sqli.stories.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -16,11 +14,6 @@ public class Sprint implements Serializable {
     private Long numero;
     private LocalDate dateDebut;
     private LocalDate dateFin;
-
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name="Sprint_Story",joinColumns=@JoinColumn(name="numero"),
-            inverseJoinColumns=@JoinColumn(name="jiraKey"))
-    private List<Story> stories = new ArrayList<>();
 
     public Sprint(Long numero, LocalDate dateDebut, LocalDate dateFin) {
         this.numero = numero;
@@ -56,25 +49,6 @@ public class Sprint implements Serializable {
         this.dateFin = dateFin;
     }
 
-    @JsonIgnore
-    public List<Story> getStories() {
-        return stories;
-    }
-
-   public void addStoryToSprint(Story story){
-        this.stories.add(story);
-   }
-   public void removeStoryFromSprint(Story story){
-        this.stories.remove(story);
-   }
-    public void addStory(Story story){
-        addStoryToSprint(story);
-        story.addSprintToStory(this);
-    }
-    public void removeStory(Story story){
-        removeStoryFromSprint(story);
-        story.removeSprintFromStory(this);
-    }
 
     @Override
     public String toString() {
@@ -90,12 +64,11 @@ public class Sprint implements Serializable {
         Sprint sprint = (Sprint) o;
         return Objects.equals(numero, sprint.numero) &&
                 Objects.equals(dateDebut, sprint.dateDebut) &&
-                Objects.equals(dateFin, sprint.dateFin) &&
-                Objects.equals(stories, sprint.stories);
+                Objects.equals(dateFin, sprint.dateFin);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numero, dateDebut, dateFin, stories);
+        return Objects.hash(numero, dateDebut, dateFin);
     }
 }

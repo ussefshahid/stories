@@ -1,10 +1,11 @@
 package com.sqli.stories.entities;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -22,11 +23,10 @@ public class Story implements Serializable {
     @OneToOne
     private Sprint sprintDONE;
     @OneToOne
+    private Sprint currentSprint;
+    @OneToOne
     private Team team;
     private int forecast;
-
-    @ManyToMany(mappedBy = "stories", fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-    private List<Sprint> sprints;
 
     public Story() {
     }
@@ -37,7 +37,7 @@ public class Story implements Serializable {
         this.storyPoint = storyPoint;
         this.storyState = storyState;
         this.priority = priority;
-        this.sprints=new ArrayList<>();
+
     }
 
     public Long getJiraKey() {
@@ -55,9 +55,7 @@ public class Story implements Serializable {
     public void setTitle(String title) {
         this.title = title;
     }
-    public List<Sprint> getSprints() {
-        return sprints;
-    }
+
 
     public Sprint getSprintPLAN() {
         return sprintPLAN;
@@ -65,16 +63,6 @@ public class Story implements Serializable {
 
     public void setSprintPLAN(Sprint sprintPLAN) {
         this.sprintPLAN = sprintPLAN;
-    }
-
-    public void setSprints(List<Sprint> sprints) {
-        this.sprints = sprints;
-    }
-    public Sprint getCurrentSprint(){
-        if(sprints!=null && !sprints.isEmpty()) {
-            return this.sprints.get(sprints.size() - 1);
-        }
-        return null;
     }
 
 
@@ -126,20 +114,12 @@ public class Story implements Serializable {
         this.sprintDONE = sprintDONE;
     }
 
-    public void addSprintToStory(Sprint sprint){
-        sprints.add(sprint);
-    }
-    public void removeSprintFromStory(Sprint sprint){
-        sprints.remove(sprint);
-    }
-    public void addSprint(Sprint sprint){
-        addSprintToStory(sprint);
-        sprint.addStoryToSprint(this);
+    public Sprint getCurrentSprint() {
+        return currentSprint;
     }
 
-    public void removeSprint(Sprint sprint){
-        removeSprintFromStory(sprint);
-        sprint.removeStoryFromSprint(this);
+    public void setCurrentSprint(Sprint currentSprint) {
+        this.currentSprint = currentSprint;
     }
 
     @Override
@@ -158,13 +138,12 @@ public class Story implements Serializable {
         return storyPoint == story.storyPoint &&
                 priority == story.priority &&
                 Objects.equals(jiraKey, story.jiraKey) &&
-                Objects.equals(title, story.title) &&
-                Objects.equals(sprints, story.sprints);
+                Objects.equals(title, story.title) ;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(jiraKey, title, storyPoint, priority, sprints);
+        return Objects.hash(jiraKey, title, storyPoint, priority);
     }
 
 }
