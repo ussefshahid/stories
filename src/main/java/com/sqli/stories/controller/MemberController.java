@@ -8,6 +8,7 @@ import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,8 +19,9 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
+
     @PostMapping("/member")
-    public ResponseEntity<Member> add(@RequestBody Member member) {
+    public ResponseEntity<Member> add( @Valid  @RequestBody Member member) {
         return Optional
                 .ofNullable(memberService.add(member))
                 .map(addedMember -> ResponseEntity.ok().body(addedMember))
@@ -27,7 +29,7 @@ public class MemberController {
     }
 
     @PutMapping("/member")
-    public ResponseEntity<Member> update(@RequestBody Member member) {
+    public ResponseEntity<Member> update(@Valid @RequestBody Member member) {
         return Optional
                 .ofNullable(memberService.update(member))
                 .map(updatedMember -> ResponseEntity.ok().body(updatedMember))

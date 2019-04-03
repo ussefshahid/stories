@@ -15,6 +15,7 @@ public class Member implements Serializable {
     @Id
     @Size(min = 4)
     private String login;
+    private  String password;
     @Pattern(regexp = "^[a-zA-Z][a-zA-Z ]+$",message = "first name contains only characters")
     @Size(min = 3)
     private String firstName;
@@ -45,6 +46,14 @@ public class Member implements Serializable {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getFirstName() {
