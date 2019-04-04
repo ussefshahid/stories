@@ -62,4 +62,7 @@ public class TeamMemberController {
     public ResponseEntity<List<TeamMember>> getByTeam(@PathVariable("id") Long id){
         return ResponseEntity.ok(teamMemberService.getByTeam(id));
     }
+
+
+
 }

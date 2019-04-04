@@ -2,12 +2,12 @@ package com.sqli.stories.helpers.payload;
 
 import javax.validation.constraints.NotBlank;
 
-public class LoginRequest {
+public class LoginRequest  {
     @NotBlank
     private String login;
     @NotBlank
     private String password;
-
+    public LoginRequest(){}
     public LoginRequest(@NotBlank String login, @NotBlank String password) {
         this.login = login;
         this.password = password;

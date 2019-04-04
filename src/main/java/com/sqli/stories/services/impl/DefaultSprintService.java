@@ -48,6 +48,11 @@ public class DefaultSprintService implements SprintService {
     }
 
     @Override
+    public Long getSmallestExistSprintKey() {
+        return sprintRepository.getSmallestExistSprintKey();
+    }
+
+    @Override
     public List<Story> getStoryBySprintKey(Long sprintKey) {
         return storyRepository.getStoriesBySprintKey(sprintKey);
     }

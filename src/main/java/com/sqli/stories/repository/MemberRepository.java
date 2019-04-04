@@ -14,4 +14,6 @@ public interface MemberRepository extends JpaRepository<Member, String> {
     Member getMemberByLogin(@Param("login") String login);
 
     boolean existsByLogin(String login);
+
+    Member getMemberByLoginAndPassword(String login,String password);
 }

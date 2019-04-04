@@ -1,9 +1,9 @@
 package com.sqli.stories.helpers.payload;
 
-public class SprintBiggerExistingKey {
+public class SprintExistingKey {
     private Long numero;
 
-    public SprintBiggerExistingKey(Long numero) {
+    public SprintExistingKey(Long numero) {
         this.numero = numero;
     }
 

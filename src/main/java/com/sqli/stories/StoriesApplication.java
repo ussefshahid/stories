@@ -10,5 +10,4 @@ public class StoriesApplication {
         SpringApplication.run(StoriesApplication.class, args);
     }
 
-
 }

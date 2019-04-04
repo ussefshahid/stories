@@ -14,4 +14,7 @@ public interface SprintRepository extends JpaRepository<Sprint, Long> {
     @Query("SELECT MAX(s.numero) as numero FROM Sprint s")
     Long getBiggerExistSprintKey();
 
+    @Query("SELECT MIN(s.numero) as numero FROM Sprint  s ")
+    Long getSmallestExistSprintKey();
+
 }

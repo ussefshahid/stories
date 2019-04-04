@@ -2,7 +2,8 @@ package com.sqli.stories.controller;
 
 import com.sqli.stories.entities.Sprint;
 import com.sqli.stories.entities.Story;
-import com.sqli.stories.helpers.payload.SprintBiggerExistingKey;
+import com.sqli.stories.helpers.factory.SprintExistingKeyFactory;
+import com.sqli.stories.helpers.payload.SprintExistingKey;
 import com.sqli.stories.helpers.payload.SprintIdentityAvailability;
 import com.sqli.stories.services.SprintService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,9 +68,14 @@ public class SprintController {
     }
 
     @GetMapping("/sprint/sprintBiggerKey")
-    public ResponseEntity<SprintBiggerExistingKey> getBiggerSprintKey(){
+    public ResponseEntity<SprintExistingKey> getBiggerSprintKey(){
         Long key=sprintService.getBiggerExistSprintKey();
-        return ResponseEntity.ok(new SprintBiggerExistingKey(key));
+        return ResponseEntity.ok(SprintExistingKeyFactory.createSprintExistingKey(key));
+    }
+    @GetMapping("/sprint/sprintSmallestKey")
+    public ResponseEntity<SprintExistingKey> getSmallestExistSprintKey(){
+        Long key=sprintService.getSmallestExistSprintKey();
+        return ResponseEntity.ok(SprintExistingKeyFactory.createSprintExistingKey(key));
     }
     @GetMapping("/sprint/{id}/stories")
     public ResponseEntity<List<Story>> getStoryBySprintKey(@PathVariable("id") Long sprintKey) {

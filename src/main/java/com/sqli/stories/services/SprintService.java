@@ -12,6 +12,7 @@ public interface SprintService {
     List<Sprint> getAll();
     boolean existsByNumero(Long numero);
     Long getBiggerExistSprintKey();
+    Long getSmallestExistSprintKey();
     List<Story> getStoryBySprintKey(Long sprintKey);
     void delete(long numero);
 }
