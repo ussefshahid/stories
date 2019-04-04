@@ -63,6 +63,16 @@ public class TeamMemberController {
         return ResponseEntity.ok(teamMemberService.getByTeam(id));
     }
 
+    @GetMapping("/teamMember/member/{login}")
+    public ResponseEntity<TeamMember> getTeamMemberByLogin(@PathVariable("login") String login){
+        return Optional
+                .ofNullable(teamMemberService.getTeamMemberByLogin(login))
+                .map(teamMember -> ResponseEntity.ok().body(teamMember))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
 
-
+    @GetMapping("/teamMember/teams/{login}")
+    public ResponseEntity<List<TeamMember>> getTeamsByLogin(@PathVariable("login") String login){
+        return ResponseEntity.ok(teamMemberService.getTeamsByLogin(login));
+    }
 }
