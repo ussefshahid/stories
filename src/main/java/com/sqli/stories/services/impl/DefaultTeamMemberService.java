@@ -42,4 +42,14 @@ public class DefaultTeamMemberService implements TeamMemberService {
     public List<TeamMember> getByTeam(Long id) {
         return teamMemberRepository.getByTeam(id);
     }
+
+    @Override
+    public TeamMember getTeamMemberByLogin(String login) {
+        return teamMemberRepository.getTeamMemberByLogin(login);
+    }
+
+    @Override
+    public List<TeamMember> getTeamsByLogin(String login) {
+        return teamMemberRepository.getTeamsByLogin(login);
+    }
 }

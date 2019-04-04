@@ -11,4 +11,6 @@ public interface TeamMemberService {
     TeamMember getById(Long id);
     List<TeamMember> getAll();
     List<TeamMember> getByTeam(Long id);
+    TeamMember getTeamMemberByLogin(String login);
+    List<TeamMember> getTeamsByLogin(String login);
 }

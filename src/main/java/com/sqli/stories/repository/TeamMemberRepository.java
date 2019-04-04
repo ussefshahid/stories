@@ -10,4 +10,10 @@ import java.util.List;
 public interface TeamMemberRepository extends JpaRepository<TeamMember, Long> {
     @Query("SELECT m FROM TeamMember m WHERE m.team.id = :id")
     List<TeamMember> getByTeam(@Param("id") Long id);
+
+    @Query("SELECT m FROM TeamMember m WHERE m.member.login = :login AND m.dateSortie = null")
+    TeamMember getTeamMemberByLogin(@Param("login") String login);
+
+    @Query("SELECT m FROM TeamMember m WHERE m.member.login = :login")
+    List<TeamMember> getTeamsByLogin(@Param("login") String login);
 }
